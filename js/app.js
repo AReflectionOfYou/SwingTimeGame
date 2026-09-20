@@ -1,13 +1,16 @@
 (function () {
   const TETRACHORD_KEY = 'handbell-tetrachord';
+  const HAND_KEY = 'handbell-handedness';
 
   const bell = new BellSynth();
   const wakeLock = new WakeLockKeeper();
   const settings = loadSettings();
 
   let currentTetrachord = localStorage.getItem(TETRACHORD_KEY) || 'lower';
+  let currentHand = localStorage.getItem(HAND_KEY) || 'right';
 
-  const toggleButtons = Array.from(document.querySelectorAll('.tetrachord-toggle button'));
+  const tetrachordButtons = Array.from(document.querySelectorAll('[data-tetrachord]'));
+  const handButtons = Array.from(document.querySelectorAll('[data-hand]'));
   const noteChips = Array.from(document.querySelectorAll('.note-chip'));
   const enableButton = document.getElementById('enable-motion');
   const statusLine = document.getElementById('status-line');
@@ -16,7 +19,7 @@
   let flashTimer = null;
 
   function renderTetrachord() {
-    toggleButtons.forEach((btn) => {
+    tetrachordButtons.forEach((btn) => {
       btn.classList.toggle('active', btn.dataset.tetrachord === currentTetrachord);
     });
     const notes = TETRACHORDS[currentTetrachord].notes;
@@ -25,11 +28,26 @@
     });
   }
 
-  toggleButtons.forEach((btn) => {
+  function renderHand() {
+    handButtons.forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.hand === currentHand);
+    });
+  }
+
+  tetrachordButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
       currentTetrachord = btn.dataset.tetrachord;
       localStorage.setItem(TETRACHORD_KEY, currentTetrachord);
       renderTetrachord();
+    });
+  });
+
+  handButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      currentHand = btn.dataset.hand;
+      localStorage.setItem(HAND_KEY, currentHand);
+      detector.updateHandedness(currentHand);
+      renderHand();
     });
   });
 
@@ -60,6 +78,7 @@
 
   const detector = new GestureDetector({
     settings,
+    handedness: currentHand,
     onGesture: handleGesture,
   });
 
@@ -112,4 +131,5 @@
   });
 
   renderTetrachord();
+  renderHand();
 })();

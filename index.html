@@ -15,15 +15,30 @@
 <body>
   <header class="app-header">
     <h1>Handbell</h1>
-    <a class="nav-link" href="debug.html">Debug</a>
+    <nav class="header-links">
+      <a class="nav-link" href="help.html">Help</a>
+      <a class="nav-link" href="debug.html">Debug</a>
+    </nav>
   </header>
 
   <main>
     <section class="panel">
-      <div class="tetrachord-toggle">
-        <button type="button" data-tetrachord="lower">Lower</button>
-        <button type="button" data-tetrachord="upper">Upper</button>
+      <div class="control-group">
+        <p class="section-title">Hand</p>
+        <div class="tetrachord-toggle">
+          <button type="button" data-hand="right">Right-handed</button>
+          <button type="button" data-hand="left">Left-handed</button>
+        </div>
       </div>
+
+      <div class="control-group">
+        <p class="section-title">Tetrachord</p>
+        <div class="tetrachord-toggle">
+          <button type="button" data-tetrachord="lower">Lower</button>
+          <button type="button" data-tetrachord="upper">Upper</button>
+        </div>
+      </div>
+
       <div class="note-list">
         <button type="button" class="note-chip">Down<strong>Do</strong></button>
         <button type="button" class="note-chip">Up<strong>Re</strong></button>

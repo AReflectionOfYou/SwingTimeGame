@@ -58,6 +58,11 @@ header.app-header h1 {
   color: var(--text-dim);
 }
 
+.header-links {
+  display: flex;
+  gap: 8px;
+}
+
 .nav-link {
   color: var(--accent);
   text-decoration: none;
@@ -65,6 +70,69 @@ header.app-header h1 {
   border: 1px solid var(--panel-border);
   padding: 6px 12px;
   border-radius: 999px;
+}
+
+.control-group {
+  margin-bottom: 16px;
+}
+
+.control-group:last-child {
+  margin-bottom: 0;
+}
+
+.help-content p,
+.help-content ul {
+  margin: 0 0 12px;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+.help-content p:last-child,
+.help-content ul:last-child {
+  margin-bottom: 0;
+}
+
+.help-content strong {
+  color: var(--text);
+}
+
+.help-content ul {
+  padding-left: 1.2em;
+}
+
+.help-content li {
+  margin-bottom: 6px;
+}
+
+.help-content li:last-child {
+  margin-bottom: 0;
+}
+
+.inline-link {
+  color: var(--accent);
+}
+
+.help-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+}
+
+.help-table th,
+.help-table td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.help-table th {
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+.help-table td {
+  color: var(--text);
 }
 
 main {

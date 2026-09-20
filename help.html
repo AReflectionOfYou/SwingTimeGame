@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <title>Handbell — Help</title>
+  <meta name="theme-color" content="#101418" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Help</h1>
+    <nav class="header-links">
+      <a class="nav-link" href="index.html">Play</a>
+      <a class="nav-link" href="debug.html">Debug</a>
+    </nav>
+  </header>
+
+  <main class="help-content">
+    <section class="panel">
+      <p class="section-title">What this is</p>
+      <p>
+        Handbell turns a phone into half of a two-person handbell choir. One
+        octave (do–re–mi–fa–sol–la–ti–do) is split into two four-note
+        tetrachords. Each phone plays one tetrachord by detecting swing
+        gestures with the motion sensors — no pairing or syncing between
+        phones required.
+      </p>
+    </section>
+
+    <section class="panel">
+      <p class="section-title">How to hold the phone</p>
+      <p>
+        Hold the phone like a hatchet or hammer, gripped sideways rather than
+        upright like you're reading it:
+      </p>
+      <ul>
+        <li><strong>Right-handed:</strong> the screen's left edge points down.</li>
+        <li><strong>Left-handed:</strong> mirrored — the screen's right edge points down.</li>
+      </ul>
+      <p>
+        Set the matching option in the <strong>Hand</strong> selector on the
+        Play screen — it's what tells the app which physical direction counts
+        as "up" versus "down."
+      </p>
+    </section>
+
+    <section class="panel">
+      <p class="section-title">The four motions</p>
+      <ul>
+        <li><strong>Down</strong> — chop the phone sharply downward.</li>
+        <li><strong>Up</strong> — swing it back up.</li>
+        <li><strong>Left</strong> — swing sideways with the back of the phone leading.</li>
+        <li><strong>Right</strong> — swing sideways with the screen leading.</li>
+      </ul>
+      <p>Each motion always rings the same note slot, regardless of hand:</p>
+      <table class="help-table">
+        <thead>
+          <tr>
+            <th>Motion</th>
+            <th>Lower</th>
+            <th>Upper</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Down</td><td>Do</td><td>Sol</td></tr>
+          <tr><td>Up</td><td>Re</td><td>La</td></tr>
+          <tr><td>Left</td><td>Mi</td><td>Ti</td></tr>
+          <tr><td>Right</td><td>Fa</td><td>Do</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <p class="section-title">Play screen controls</p>
+      <ul>
+        <li><strong>Hand</strong> — Right-handed or Left-handed. Must match your actual grip.</li>
+        <li><strong>Tetrachord</strong> — Lower or Upper. Picks which half of the octave you're playing.</li>
+        <li>
+          <strong>Note chips</strong> (Down/Up/Left/Right, showing the current
+          note names) — tap one to ring that note directly, without swinging.
+          Handy for checking your notes before playing.
+        </li>
+        <li>
+          <strong>Enable Motion / Stop Motion</strong> — turns gesture
+          detection on or off. Tap Stop Motion any time to silence the phone
+          without leaving the page.
+        </li>
+      </ul>
+      <p>
+        You don't need to watch the screen while playing — the app is
+        designed to be used by feel while reading a paper score.
+      </p>
+    </section>
+
+    <section class="panel">
+      <p class="section-title">If gestures misfire</p>
+      <p>
+        Open the <a class="inline-link" href="debug.html">Debug</a> screen for
+        a live sensor readout, a log of detected gestures, and sliders to
+        adjust the sensitivity thresholds without editing any code.
+      </p>
+    </section>
+  </main>
+</body>
+</html>

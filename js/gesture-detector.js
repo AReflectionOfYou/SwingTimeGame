@@ -2,18 +2,20 @@
 // devicemotion, watches for a swing that crosses `triggerThreshold`, and
 // classifies it by which device axis dominates and its sign.
 //
-// The phone is held in a "hatchet grip" (rotated 90° from portrait, screen's
-// left edge pointing down), not upright portrait:
-//   x = the phone's left/right edge axis, now VERTICAL: +x = up, -x = down.
-//   y, z = the two remaining, roughly horizontal axes. Whichever of the two
-//     reads larger at the moment of a swing is treated as the left/right
-//     axis, since which one actually carries the sideways-swing signal
-//     depends on which way the screen faces while held.
+// The phone is held in a "hatchet grip" (rotated 90° from portrait), not
+// upright portrait:
+//   x = the phone's left/right edge axis, now VERTICAL (up/down chop).
+//     Right-handed: left edge down, so +x = up, -x = down.
+//     Left-handed: mirrored grip, right edge down, so +x = down, -x = up.
+//   z = the screen-normal axis, used for left/right: a swing with the
+//     screen face leading is "right" (+z), one with the back leading is
+//     "left" (-z). This convention doesn't flip with handedness.
 class GestureDetector {
-  constructor({ onGesture, onSample, settings } = {}) {
+  constructor({ onGesture, onSample, settings, handedness } = {}) {
     this.onGesture = onGesture || (() => {});
     this.onSample = onSample || (() => {});
     this.settings = settings || { ...SETTINGS_DEFAULTS };
+    this.handedness = handedness || 'right';
     this.lastGestureTime = 0;
     this._handleMotion = this._handleMotion.bind(this);
   }
@@ -35,6 +37,10 @@ class GestureDetector {
 
   updateSettings(settings) {
     this.settings = settings;
+  }
+
+  updateHandedness(handedness) {
+    this.handedness = handedness;
   }
 
   start() {
@@ -66,10 +72,15 @@ class GestureDetector {
     if (magnitude < this.settings.triggerThreshold) return;
 
     const absX = Math.abs(x);
-    const horizontal = Math.abs(y) >= Math.abs(z) ? y : z;
+    const isRightHanded = this.handedness !== 'left';
 
-    const gesture =
-      absX >= Math.abs(horizontal) ? (x > 0 ? 'up' : 'down') : horizontal > 0 ? 'right' : 'left';
+    let gesture;
+    if (absX >= Math.abs(z)) {
+      const isUp = isRightHanded ? x > 0 : x < 0;
+      gesture = isUp ? 'up' : 'down';
+    } else {
+      gesture = z > 0 ? 'right' : 'left';
+    }
 
     this.lastGestureTime = now;
     this.onGesture(gesture, { x, y, z, magnitude });

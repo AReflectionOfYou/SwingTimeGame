@@ -55,6 +55,7 @@
 
   const detector = new GestureDetector({
     settings,
+    handedness: localStorage.getItem('handbell-handedness') || 'right',
     onGesture: handleGesture,
     onSample: renderReadout,
   });
