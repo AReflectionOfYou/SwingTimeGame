@@ -63,30 +63,53 @@
     onGesture: handleGesture,
   });
 
-  async function enableMotion() {
+  let motionActive = false;
+  let permissionGranted = false;
+
+  async function startMotion() {
     enableButton.disabled = true;
-    statusLine.textContent = 'Requesting permission…';
-    try {
-      bell.ensureContext();
-      const granted = await GestureDetector.requestPermission();
-      if (!granted) {
-        statusLine.textContent = 'Motion permission denied. Reload to try again.';
+    if (!permissionGranted) {
+      statusLine.textContent = 'Requesting permission…';
+      try {
+        bell.ensureContext();
+        const granted = await GestureDetector.requestPermission();
+        if (!granted) {
+          statusLine.textContent = 'Motion permission denied. Reload to try again.';
+          enableButton.disabled = false;
+          return;
+        }
+        permissionGranted = true;
+      } catch (err) {
+        statusLine.textContent = 'Could not enable motion: ' + err.message;
         enableButton.disabled = false;
         return;
       }
-      detector.start();
-      const lockedScreen = await wakeLock.enable();
-      enableButton.hidden = true;
-      statusLine.textContent = lockedScreen
-        ? 'Motion enabled — ready to ring.'
-        : 'Motion enabled — ready to ring (screen may sleep).';
-    } catch (err) {
-      statusLine.textContent = 'Could not enable motion: ' + err.message;
-      enableButton.disabled = false;
     }
+    detector.start();
+    const lockedScreen = await wakeLock.enable();
+    motionActive = true;
+    enableButton.textContent = 'Stop Motion';
+    enableButton.disabled = false;
+    statusLine.textContent = lockedScreen
+      ? 'Motion enabled — ready to ring.'
+      : 'Motion enabled — ready to ring (screen may sleep).';
   }
 
-  enableButton.addEventListener('click', enableMotion);
+  function stopMotion() {
+    detector.stop();
+    wakeLock.release();
+    motionActive = false;
+    enableButton.textContent = 'Enable Motion';
+    statusLine.textContent = 'Motion stopped.';
+  }
+
+  enableButton.addEventListener('click', () => {
+    if (motionActive) {
+      stopMotion();
+    } else {
+      startMotion();
+    }
+  });
 
   // Best-effort only: iOS Safari does not support screen orientation lock
   // for regular (non-fullscreen) web pages. The CSS orientation guard in

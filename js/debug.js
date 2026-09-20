@@ -18,7 +18,7 @@
   const sliderConfigs = [
     { key: 'triggerThreshold', id: 'slider-trigger', suffix: ' m/s²' },
     { key: 'refractoryMs', id: 'slider-refractory', suffix: ' ms' },
-    { key: 'twistThreshold', id: 'slider-twist', suffix: ' rad/s' },
+    { key: 'twistThreshold', id: 'slider-twist', suffix: ' deg/s' },
   ];
 
   function formatNum(n) {
@@ -62,26 +62,48 @@
 
   setInterval(renderLog, 250);
 
-  async function enableMotion() {
+  let motionActive = false;
+  let permissionGranted = false;
+
+  async function startMotion() {
     enableButton.disabled = true;
-    statusLine.textContent = 'Requesting permission…';
-    try {
-      const granted = await GestureDetector.requestPermission();
-      if (!granted) {
-        statusLine.textContent = 'Motion permission denied. Reload to try again.';
+    if (!permissionGranted) {
+      statusLine.textContent = 'Requesting permission…';
+      try {
+        const granted = await GestureDetector.requestPermission();
+        if (!granted) {
+          statusLine.textContent = 'Motion permission denied. Reload to try again.';
+          enableButton.disabled = false;
+          return;
+        }
+        permissionGranted = true;
+      } catch (err) {
+        statusLine.textContent = 'Could not enable motion: ' + err.message;
         enableButton.disabled = false;
         return;
       }
-      detector.start();
-      enableButton.hidden = true;
-      statusLine.textContent = 'Motion enabled — live readout below.';
-    } catch (err) {
-      statusLine.textContent = 'Could not enable motion: ' + err.message;
-      enableButton.disabled = false;
     }
+    detector.start();
+    motionActive = true;
+    enableButton.textContent = 'Stop Motion';
+    enableButton.disabled = false;
+    statusLine.textContent = 'Motion enabled — live readout below.';
   }
 
-  enableButton.addEventListener('click', enableMotion);
+  function stopMotion() {
+    detector.stop();
+    motionActive = false;
+    enableButton.textContent = 'Enable Motion';
+    statusLine.textContent = 'Motion stopped.';
+  }
+
+  enableButton.addEventListener('click', () => {
+    if (motionActive) {
+      stopMotion();
+    } else {
+      startMotion();
+    }
+  });
 
   function bindSlider({ key, id, suffix }) {
     const input = document.getElementById(id);

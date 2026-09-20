@@ -7,8 +7,8 @@
 //   x = left/right across the screen
 //   y = up/down along the screen
 //   z = toward/away from the user's face (out of the screen)
-// rotationRate.gamma = rotation around the y-axis, which is what a
-// wrist-twist (snap right / twist for "fa") mostly shows up as.
+// rotationRate.gamma = rotation around the y-axis, in degrees/second, which
+// is what a wrist-twist (snap right / twist for "fa") mostly shows up as.
 class GestureDetector {
   constructor({ onGesture, onSample, settings } = {}) {
     this.onGesture = onGesture || (() => {});

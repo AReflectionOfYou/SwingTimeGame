@@ -17,6 +17,16 @@ class WakeLockKeeper {
     }
   }
 
+  async release() {
+    if (!this.sentinel) return;
+    try {
+      await this.sentinel.release();
+    } catch (err) {
+      // already released
+    }
+    this.sentinel = null;
+  }
+
   async _onVisibilityChange() {
     if (this.sentinel && document.visibilityState === 'visible') {
       await this.enable();
