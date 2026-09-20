@@ -8,8 +8,8 @@
 //     Right-handed: left edge down, so +x = up, -x = down.
 //     Left-handed: mirrored grip, right edge down, so +x = down, -x = up.
 //   z = the screen-normal axis, used for left/right: a swing with the
-//     screen face leading is "right" (+z), one with the back leading is
-//     "left" (-z). This convention doesn't flip with handedness.
+//     screen face leading is "left" (+z), one with the back leading is
+//     "right" (-z). This convention doesn't flip with handedness.
 class GestureDetector {
   constructor({ onGesture, onSample, settings, handedness } = {}) {
     this.onGesture = onGesture || (() => {});
@@ -79,7 +79,7 @@ class GestureDetector {
       const isUp = isRightHanded ? x > 0 : x < 0;
       gesture = isUp ? 'up' : 'down';
     } else {
-      gesture = z > 0 ? 'right' : 'left';
+      gesture = z > 0 ? 'left' : 'right';
     }
 
     this.lastGestureTime = now;
