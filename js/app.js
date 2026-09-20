@@ -12,8 +12,6 @@
   const enableButton = document.getElementById('enable-motion');
   const statusLine = document.getElementById('status-line');
   const noteFlash = document.getElementById('note-flash');
-  const testToneButton = document.getElementById('test-tone');
-  const audioStateLabel = document.getElementById('audio-state');
 
   let flashTimer = null;
 
@@ -35,6 +33,14 @@
     });
   });
 
+  noteChips.forEach((chip, i) => {
+    chip.addEventListener('click', () => {
+      const note = TETRACHORDS[currentTetrachord].notes[i];
+      bell.ring(note.freq);
+      flashNote(note.name);
+    });
+  });
+
   function flashNote(name) {
     noteFlash.textContent = name;
     noteFlash.classList.remove('show');
@@ -50,7 +56,6 @@
     if (!note) return;
     bell.ring(note.freq);
     flashNote(note.name);
-    audioStateLabel.textContent = bell.getState();
   }
 
   const detector = new GestureDetector({
@@ -75,7 +80,6 @@
       statusLine.textContent = lockedScreen
         ? 'Motion enabled — ready to ring.'
         : 'Motion enabled — ready to ring (screen may sleep).';
-      audioStateLabel.textContent = bell.getState();
     } catch (err) {
       statusLine.textContent = 'Could not enable motion: ' + err.message;
       enableButton.disabled = false;
@@ -83,13 +87,6 @@
   }
 
   enableButton.addEventListener('click', enableMotion);
-
-  testToneButton.addEventListener('click', () => {
-    const notes = TETRACHORDS[currentTetrachord].notes;
-    bell.ring(notes[0].freq);
-    flashNote(notes[0].name);
-    audioStateLabel.textContent = bell.getState();
-  });
 
   // Best-effort only: iOS Safari does not support screen orientation lock
   // for regular (non-fullscreen) web pages. The CSS orientation guard in

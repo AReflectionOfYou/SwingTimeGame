@@ -116,9 +116,16 @@ main {
   text-align: center;
   padding: 8px 4px;
   border-radius: 10px;
+  border: none;
   background: rgba(255, 255, 255, 0.04);
+  font-family: inherit;
   font-size: 0.85rem;
   color: var(--text-dim);
+}
+
+.note-list .note-chip:active {
+  background: var(--accent-dim);
+  color: var(--text);
 }
 
 .note-list .note-chip strong {

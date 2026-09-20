@@ -16,10 +16,6 @@ class BellSynth {
     return this.ctx;
   }
 
-  getState() {
-    return this.ctx ? this.ctx.state : 'not started';
-  }
-
   ring(freq) {
     const ctx = this.ensureContext();
     const now = ctx.currentTime;
