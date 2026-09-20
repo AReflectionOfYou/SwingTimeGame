@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <title>Handbell — Debug</title>
+  <meta name="theme-color" content="#101418" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="orientation-guard">Rotate your phone to portrait to calibrate.</div>
+
+  <header class="app-header">
+    <h1>Debug / Calibration</h1>
+    <a class="nav-link" href="index.html">Play</a>
+  </header>
+
+  <main>
+    <section class="panel">
+      <button id="enable-motion" class="primary-button" type="button">Enable Motion</button>
+      <p id="status-line" class="status-line">Tap Enable Motion to see live readings.</p>
+    </section>
+
+    <section class="panel">
+      <p class="section-title">Live sensor readout</p>
+      <div class="readout-grid">
+        <div class="readout-item">
+          <span class="label">Accel X</span>
+          <span class="value" id="readout-x">0.00</span>
+        </div>
+        <div class="readout-item">
+          <span class="label">Accel Y</span>
+          <span class="value" id="readout-y">0.00</span>
+        </div>
+        <div class="readout-item">
+          <span class="label">Accel Z</span>
+          <span class="value" id="readout-z">0.00</span>
+        </div>
+        <div class="readout-item">
+          <span class="label">Magnitude</span>
+          <span class="value" id="readout-magnitude">0.00</span>
+        </div>
+        <div class="readout-item">
+          <span class="label">Twist (γ rate)</span>
+          <span class="value" id="readout-gamma">0.00</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <p class="section-title">Sensitivity thresholds</p>
+
+      <div class="slider-row">
+        <label class="slider-label" for="slider-trigger">
+          <span>Swing trigger threshold</span>
+          <span class="value">—</span>
+        </label>
+        <input type="range" id="slider-trigger" />
+      </div>
+
+      <div class="slider-row">
+        <label class="slider-label" for="slider-refractory">
+          <span>Refractory period</span>
+          <span class="value">—</span>
+        </label>
+        <input type="range" id="slider-refractory" />
+      </div>
+
+      <div class="slider-row">
+        <label class="slider-label" for="slider-twist">
+          <span>Twist threshold</span>
+          <span class="value">—</span>
+        </label>
+        <input type="range" id="slider-twist" />
+      </div>
+
+      <button id="reset-settings" class="reset-button" type="button">Reset to defaults</button>
+    </section>
+
+    <section class="panel">
+      <p class="section-title">Detected gestures</p>
+      <ul class="gesture-log" id="gesture-log"></ul>
+    </section>
+  </main>
+
+  <script src="js/notes.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/gesture-detector.js"></script>
+  <script src="js/debug.js"></script>
+</body>
+</html>

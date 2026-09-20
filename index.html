@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <title>Handbell</title>
+  <meta name="theme-color" content="#101418" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="orientation-guard">Rotate your phone to portrait to play.</div>
+
+  <header class="app-header">
+    <h1>Handbell</h1>
+    <a class="nav-link" href="debug.html">Debug</a>
+  </header>
+
+  <main>
+    <section class="panel">
+      <div class="tetrachord-toggle">
+        <button type="button" data-tetrachord="lower">Lower</button>
+        <button type="button" data-tetrachord="upper">Upper</button>
+      </div>
+      <div class="note-list">
+        <div class="note-chip">Fwd<strong>Do</strong></div>
+        <div class="note-chip">Back<strong>Re</strong></div>
+        <div class="note-chip">Left<strong>Mi</strong></div>
+        <div class="note-chip">Right<strong>Fa</strong></div>
+      </div>
+    </section>
+
+    <div class="stage panel">
+      <div id="note-flash">—</div>
+    </div>
+
+    <section class="panel">
+      <button id="enable-motion" class="primary-button" type="button">Enable Motion</button>
+      <p id="status-line" class="status-line">Tap Enable Motion to start ringing.</p>
+    </section>
+  </main>
+
+  <script src="js/notes.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/gesture-detector.js"></script>
+  <script src="js/wake-lock.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
