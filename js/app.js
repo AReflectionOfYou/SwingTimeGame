@@ -111,12 +111,5 @@
     }
   });
 
-  // Best-effort only: iOS Safari does not support screen orientation lock
-  // for regular (non-fullscreen) web pages. The CSS orientation guard in
-  // index.html covers that case.
-  if (screen.orientation && screen.orientation.lock) {
-    screen.orientation.lock('portrait').catch(() => {});
-  }
-
   renderTetrachord();
 })();

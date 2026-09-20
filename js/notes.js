@@ -1,6 +1,6 @@
 // Diatonic scale (C major) split into two tetrachords, each mapped to the
 // same four gesture classes.
-const GESTURE_ORDER = ['forward', 'back', 'left', 'right'];
+const GESTURE_ORDER = ['down', 'up', 'left', 'right'];
 
 const TETRACHORDS = {
   lower: {

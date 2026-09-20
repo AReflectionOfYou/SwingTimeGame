@@ -274,10 +274,6 @@ main {
   margin: 0 0 10px;
 }
 
-#test-tone {
-  margin-top: 4px;
-}
-
 .reset-button {
   width: 100%;
   padding: 10px;
@@ -288,22 +284,3 @@ main {
   font-size: 0.85rem;
 }
 
-#orientation-guard {
-  position: fixed;
-  inset: 0;
-  background: var(--bg);
-  color: var(--text);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 24px;
-  z-index: 1000;
-  font-size: 1.1rem;
-}
-
-@media (orientation: landscape) {
-  #orientation-guard {
-    display: flex;
-  }
-}

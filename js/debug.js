@@ -18,7 +18,6 @@
   const sliderConfigs = [
     { key: 'triggerThreshold', id: 'slider-trigger', suffix: ' m/s²' },
     { key: 'refractoryMs', id: 'slider-refractory', suffix: ' ms' },
-    { key: 'twistThreshold', id: 'slider-twist', suffix: ' deg/s' },
   ];
 
   function formatNum(n) {

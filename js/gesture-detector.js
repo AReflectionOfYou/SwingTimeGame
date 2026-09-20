@@ -1,14 +1,14 @@
 // Heuristic, threshold-based gesture classifier (no ML). Listens to
-// devicemotion, watches for a swing that crosses `triggerThreshold` (or a
-// wrist twist that crosses `twistThreshold`), and classifies it into one of
-// four directions based on which axis dominates and its sign.
+// devicemotion, watches for a swing that crosses `triggerThreshold`, and
+// classifies it by which device axis dominates and its sign.
 //
-// Device axes in portrait orientation:
-//   x = left/right across the screen
-//   y = up/down along the screen
-//   z = toward/away from the user's face (out of the screen)
-// rotationRate.gamma = rotation around the y-axis, in degrees/second, which
-// is what a wrist-twist (snap right / twist for "fa") mostly shows up as.
+// The phone is held in a "hatchet grip" (rotated 90° from portrait, screen's
+// left edge pointing down), not upright portrait:
+//   x = the phone's left/right edge axis, now VERTICAL: +x = up, -x = down.
+//   y, z = the two remaining, roughly horizontal axes. Whichever of the two
+//     reads larger at the moment of a swing is treated as the left/right
+//     axis, since which one actually carries the sideways-swing signal
+//     depends on which way the screen faces while held.
 class GestureDetector {
   constructor({ onGesture, onSample, settings } = {}) {
     this.onGesture = onGesture || (() => {});
@@ -63,27 +63,15 @@ class GestureDetector {
 
     const now = performance.now();
     if (now - this.lastGestureTime < this.settings.refractoryMs) return;
+    if (magnitude < this.settings.triggerThreshold) return;
 
-    const overSwingThreshold = magnitude >= this.settings.triggerThreshold;
-    const overTwistThreshold = Math.abs(gammaRate) >= this.settings.twistThreshold;
-    if (!overSwingThreshold && !overTwistThreshold) return;
+    const absX = Math.abs(x);
+    const horizontal = Math.abs(y) >= Math.abs(z) ? y : z;
 
-    let gesture = null;
-    if (overSwingThreshold) {
-      const absX = Math.abs(x);
-      const absZ = Math.abs(z);
-      if (absZ >= absX) {
-        gesture = z > 0 ? 'forward' : 'back';
-      } else {
-        gesture = x < 0 ? 'left' : 'right';
-      }
-    } else if (overTwistThreshold) {
-      gesture = 'right'; // twist is an alternate trigger for "fa"
-    }
+    const gesture =
+      absX >= Math.abs(horizontal) ? (x > 0 ? 'up' : 'down') : horizontal > 0 ? 'right' : 'left';
 
-    if (gesture) {
-      this.lastGestureTime = now;
-      this.onGesture(gesture, { x, y, z, magnitude, gammaRate });
-    }
+    this.lastGestureTime = now;
+    this.onGesture(gesture, { x, y, z, magnitude });
   }
 }
