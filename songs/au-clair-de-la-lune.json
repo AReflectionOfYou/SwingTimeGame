@@ -1,0 +1,15 @@
+{
+  "title": "Au Clair de la Lune (opening phrase)",
+  "bpm": 100,
+  "beatsPerMeasure": 4,
+  "notes": [
+    {"note": "Do", "beat": 0},
+    {"note": "Do", "beat": 1},
+    {"note": "Do", "beat": 2},
+    {"note": "Do", "beat": 3},
+    {"note": "Re", "beat": 4},
+    {"note": "Mi", "beat": 5},
+    {"note": "Re", "beat": 6},
+    {"note": "Do", "beat": 7}
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "title": "Hot Cross Buns",
+  "bpm": 90,
+  "beatsPerMeasure": 4,
+  "notes": [
+    {"note": "Mi", "beat": 0},
+    {"note": "Re", "beat": 1},
+    {"note": "Do", "beat": 2},
+    {"note": "Mi", "beat": 4},
+    {"note": "Re", "beat": 5},
+    {"note": "Do", "beat": 6}
+  ]
+}
