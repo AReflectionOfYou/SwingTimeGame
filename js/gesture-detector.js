@@ -5,8 +5,12 @@
 // The phone is held in a "hatchet grip" (rotated 90° from portrait), not
 // upright portrait:
 //   x = the phone's left/right edge axis, now VERTICAL (up/down chop).
-//     Right-handed: left edge down, so +x = up, -x = down.
-//     Left-handed: mirrored grip, right edge down, so +x = down, -x = up.
+//     A chop pivots at the elbow/shoulder, so the accelerometer reading is
+//     dominated by centripetal acceleration (toward the pivot), which is
+//     opposite the direction of travel — a downward chop reads positive on
+//     whichever end of x is "up" at rest, not negative.
+//     Right-handed: left edge down at rest, so -x = up, +x = down.
+//     Left-handed: mirrored grip, left edge up at rest, so +x = up, -x = down.
 //   z = the screen-normal axis, used for left/right: a swing with the
 //     screen face leading is "left" (+z), one with the back leading is
 //     "right" (-z). This convention doesn't flip with handedness.
@@ -76,7 +80,7 @@ class GestureDetector {
 
     let gesture;
     if (absX >= Math.abs(z)) {
-      const isUp = isRightHanded ? x > 0 : x < 0;
+      const isUp = isRightHanded ? x < 0 : x > 0;
       gesture = isUp ? 'up' : 'down';
     } else {
       gesture = z > 0 ? 'left' : 'right';
