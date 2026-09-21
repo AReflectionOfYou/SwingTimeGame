@@ -12,16 +12,19 @@
     title.textContent = song.title;
     const meta = document.createElement('span');
     meta.className = 'score-meta';
-    meta.textContent = song.bpm + ' BPM · ' + song.beatsPerMeasure + '/4';
+    meta.textContent = song.beatsPerMeasure + '/4 time';
     heading.appendChild(title);
     heading.appendChild(meta);
 
     const grid = document.createElement('div');
     grid.className = 'score-grid-wrap';
 
+    const handle = renderScore(song, grid);
+    const controls = createScorePlayer(song, handle);
+
     card.appendChild(heading);
+    card.appendChild(controls);
     card.appendChild(grid);
-    renderScore(song, grid);
     return card;
   }
 

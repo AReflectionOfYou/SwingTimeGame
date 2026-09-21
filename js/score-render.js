@@ -1,6 +1,6 @@
-// Static grid renderer for the shared score display (Phase 1: no playhead).
-// Rows run high-to-low, top to bottom, matching the visual convention that
-// higher pitches sit higher on the page.
+// Grid renderer for the shared score display. Rows run high-to-low, top to
+// bottom, matching the visual convention that higher pitches sit higher on
+// the page.
 const SCORE_ROWS = [
   { label: 'Do', tetrachord: 'upper' },
   { label: 'Ti', tetrachord: 'upper' },
@@ -30,28 +30,36 @@ function scoreTotalBeats(song) {
   return measures * song.beatsPerMeasure;
 }
 
+// Renders the score grid into `container` and returns a handle for
+// positioning the playhead. The label column and the beat track are separate
+// flex children so the playhead (and beat math generally) can use a plain
+// 0-1 fraction of the track's width, independent of the label column's width.
 function renderScore(song, container) {
   container.innerHTML = '';
 
   const totalBeats = scoreTotalBeats(song);
+
   const grid = document.createElement('div');
   grid.className = 'score-grid';
-  grid.style.gridTemplateColumns = 'var(--score-label-width) repeat(' + totalBeats + ', 1fr)';
-  grid.style.gridTemplateRows = 'repeat(' + SCORE_ROWS.length + ', 1fr)';
 
-  // Indexed by [rowIndex][beat] so notes can be dropped into their cell
-  // below, rather than positioned as separate grid items (an absolutely
-  // positioned grid item ignores grid-row/grid-column placement and instead
-  // covers the whole grid, so marks must nest inside their cell).
+  const labelCol = document.createElement('div');
+  labelCol.className = 'score-label-col';
+
+  const track = document.createElement('div');
+  track.className = 'score-track';
+
+  const cells = document.createElement('div');
+  cells.className = 'score-cells';
+  cells.style.gridTemplateColumns = 'repeat(' + totalBeats + ', 1fr)';
+  cells.style.gridTemplateRows = 'repeat(' + SCORE_ROWS.length + ', 1fr)';
+
   const cellsByRowAndBeat = SCORE_ROWS.map(() => []);
 
   SCORE_ROWS.forEach((row, rowIndex) => {
     const label = document.createElement('div');
     label.className = 'score-row-label score-tetra-' + row.tetrachord;
     label.textContent = row.label;
-    label.style.gridRow = String(rowIndex + 1);
-    label.style.gridColumn = '1';
-    grid.appendChild(label);
+    labelCol.appendChild(label);
 
     for (let beat = 0; beat < totalBeats; beat++) {
       const cell = document.createElement('div');
@@ -60,8 +68,8 @@ function renderScore(song, container) {
         cell.classList.add('score-measure-start');
       }
       cell.style.gridRow = String(rowIndex + 1);
-      cell.style.gridColumn = String(beat + 2);
-      grid.appendChild(cell);
+      cell.style.gridColumn = String(beat + 1);
+      cells.appendChild(cell);
       cellsByRowAndBeat[rowIndex][beat] = cell;
     }
   });
@@ -76,5 +84,20 @@ function renderScore(song, container) {
     cell.appendChild(mark);
   });
 
+  const playhead = document.createElement('div');
+  playhead.className = 'score-playhead';
+  playhead.style.left = '0%';
+
+  track.appendChild(cells);
+  track.appendChild(playhead);
+  grid.appendChild(labelCol);
+  grid.appendChild(track);
   container.appendChild(grid);
+
+  return {
+    totalBeats: totalBeats,
+    setPlayheadFraction: function (fraction) {
+      playhead.style.left = Math.max(0, Math.min(1, fraction)) * 100 + '%';
+    },
+  };
 }

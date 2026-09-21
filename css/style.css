@@ -401,9 +401,37 @@ main {
 }
 
 .score-grid {
+  display: flex;
+  min-width: max-content;
+}
+
+.score-label-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: var(--score-label-width);
+  flex-shrink: 0;
+}
+
+.score-track {
+  position: relative;
+  flex: 1;
+}
+
+.score-cells {
   display: grid;
   gap: 2px;
-  min-width: max-content;
+}
+
+.score-playhead {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  margin-left: -1.5px;
+  background: var(--danger);
+  border-radius: 2px;
+  pointer-events: none;
 }
 
 .score-row-label {
@@ -458,5 +486,63 @@ main {
 
 .score-mark.score-tetra-upper {
   background: var(--tetra-upper);
+}
+
+.score-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.score-btn {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--panel-border);
+  background: transparent;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.score-btn-play {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #201802;
+}
+
+.score-tempo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 160px;
+}
+
+.score-tempo-label {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.score-tempo input[type='range'] {
+  flex: 1;
+  accent-color: var(--accent);
+}
+
+.score-tempo-value {
+  color: var(--text);
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  min-width: 4.5em;
+}
+
+.score-beat-counter {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
