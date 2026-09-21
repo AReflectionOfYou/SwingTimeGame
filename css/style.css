@@ -368,7 +368,34 @@ main {
   font-size: 0.85rem;
 }
 
-.score-list {
+.score-main {
+  gap: 16px;
+}
+
+.song-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.song-picker-btn {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--panel-border);
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.song-picker-btn.active {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.score-stage {
   overflow-x: auto;
 }
 

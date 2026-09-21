@@ -1,5 +1,12 @@
 (function () {
-  const scoreList = document.getElementById('score-list');
+  const SONG_KEY = 'handbell-score-song';
+
+  const picker = document.getElementById('song-picker');
+  const stage = document.getElementById('score-stage');
+
+  let songs = [];
+  let currentIndex = 0;
+  let activePlayer = null;
 
   function songCard(song) {
     const card = document.createElement('section');
@@ -20,19 +27,52 @@
     grid.className = 'score-grid-wrap';
 
     const handle = renderScore(song, grid);
-    const controls = createScorePlayer(song, handle);
+    const player = createScorePlayer(song, handle);
 
     card.appendChild(heading);
-    card.appendChild(controls);
+    card.appendChild(player.element);
     card.appendChild(grid);
-    return card;
+
+    return { element: card, player: player };
+  }
+
+  function renderPicker() {
+    picker.innerHTML = '';
+    songs.forEach((song, i) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'song-picker-btn';
+      btn.classList.toggle('active', i === currentIndex);
+      btn.textContent = song.title;
+      btn.addEventListener('click', () => selectSong(i));
+      picker.appendChild(btn);
+    });
+  }
+
+  function renderStage() {
+    if (activePlayer) activePlayer.dispose();
+    stage.innerHTML = '';
+    const card = songCard(songs[currentIndex]);
+    activePlayer = card.player;
+    stage.appendChild(card.element);
+  }
+
+  function selectSong(index) {
+    currentIndex = index;
+    localStorage.setItem(SONG_KEY, String(index));
+    renderPicker();
+    renderStage();
   }
 
   loadSongs()
-    .then((songs) => {
-      songs.forEach((song) => scoreList.appendChild(songCard(song)));
+    .then((loadedSongs) => {
+      songs = loadedSongs;
+      const saved = Number(localStorage.getItem(SONG_KEY));
+      currentIndex = Number.isInteger(saved) && saved >= 0 && saved < songs.length ? saved : 0;
+      renderPicker();
+      renderStage();
     })
     .catch((err) => {
-      scoreList.textContent = 'Could not load songs: ' + err.message;
+      stage.textContent = 'Could not load songs: ' + err.message;
     });
 })();

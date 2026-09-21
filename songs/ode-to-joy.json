@@ -1,0 +1,22 @@
+{
+  "title": "Ode to Joy (opening phrase)",
+  "bpm": 104,
+  "beatsPerMeasure": 4,
+  "notes": [
+    {"note": "Mi", "beat": 0},
+    {"note": "Mi", "beat": 1},
+    {"note": "Fa", "beat": 2},
+    {"note": "Sol", "beat": 3},
+    {"note": "Sol", "beat": 4},
+    {"note": "Fa", "beat": 5},
+    {"note": "Mi", "beat": 6},
+    {"note": "Re", "beat": 7},
+    {"note": "Do", "beat": 8},
+    {"note": "Do", "beat": 9},
+    {"note": "Re", "beat": 10},
+    {"note": "Mi", "beat": 11},
+    {"note": "Mi", "beat": 12},
+    {"note": "Re", "beat": 13},
+    {"note": "Re", "beat": 14}
+  ]
+}

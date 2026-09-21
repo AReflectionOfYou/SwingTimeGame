@@ -1,0 +1,20 @@
+{
+  "title": "Mary Had a Little Lamb",
+  "bpm": 104,
+  "beatsPerMeasure": 4,
+  "notes": [
+    {"note": "Mi", "beat": 0},
+    {"note": "Re", "beat": 1},
+    {"note": "Do", "beat": 2},
+    {"note": "Re", "beat": 3},
+    {"note": "Mi", "beat": 4},
+    {"note": "Mi", "beat": 5},
+    {"note": "Mi", "beat": 6},
+    {"note": "Re", "beat": 8},
+    {"note": "Re", "beat": 9},
+    {"note": "Re", "beat": 10},
+    {"note": "Mi", "beat": 12},
+    {"note": "Sol", "beat": 13},
+    {"note": "Sol", "beat": 14}
+  ]
+}

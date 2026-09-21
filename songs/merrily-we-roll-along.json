@@ -1,0 +1,16 @@
+{
+  "title": "Merrily We Roll Along",
+  "bpm": 108,
+  "beatsPerMeasure": 3,
+  "notes": [
+    {"note": "Do", "beat": 0},
+    {"note": "Re", "beat": 1},
+    {"note": "Mi", "beat": 2},
+    {"note": "Fa", "beat": 3},
+    {"note": "Sol", "beat": 4},
+    {"note": "Fa", "beat": 5},
+    {"note": "Mi", "beat": 6},
+    {"note": "Re", "beat": 7},
+    {"note": "Do", "beat": 8}
+  ]
+}

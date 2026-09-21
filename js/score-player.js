@@ -111,5 +111,10 @@ function createScorePlayer(song, handle) {
 
   setBeatPosition(0);
 
-  return controls;
+  return {
+    element: controls,
+    // Stops the animation loop; needed when the song picker swaps in a
+    // different song so the old song doesn't keep animating in the background.
+    dispose: pause,
+  };
 }
