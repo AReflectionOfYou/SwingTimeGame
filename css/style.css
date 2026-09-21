@@ -320,13 +320,24 @@ main {
   padding: 8px 10px;
   font-size: 0.85rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  align-items: baseline;
+  row-gap: 2px;
 }
 
 .gesture-log li .gesture-name {
   color: var(--accent);
   font-weight: 700;
   text-transform: uppercase;
+}
+
+.gesture-log li .gesture-values {
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+  flex-basis: 100%;
+  order: 3;
 }
 
 .gesture-log li .ago {

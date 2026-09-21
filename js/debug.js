@@ -24,7 +24,15 @@
     return n.toFixed(2);
   }
 
+  // devicemotion fires far faster than a human can read; only repaint the
+  // live readout a few times a second so the numbers are legible.
+  const READOUT_INTERVAL_MS = 200;
+  let lastReadoutRender = 0;
+
   function renderReadout(sample) {
+    const now = performance.now();
+    if (now - lastReadoutRender < READOUT_INTERVAL_MS) return;
+    lastReadoutRender = now;
     readouts.x.textContent = formatNum(sample.x);
     readouts.y.textContent = formatNum(sample.y);
     readouts.z.textContent = formatNum(sample.z);
@@ -40,6 +48,12 @@
       li.innerHTML =
         '<span class="gesture-name">' +
         entry.gesture +
+        '</span><span class="gesture-values">x:' +
+        formatNum(entry.x) +
+        ' y:' +
+        formatNum(entry.y) +
+        ' z:' +
+        formatNum(entry.z) +
         '</span><span class="ago">' +
         ageSec +
         's ago</span>';
@@ -47,8 +61,8 @@
     });
   }
 
-  function handleGesture(gesture) {
-    gestureLog.push({ gesture, time: performance.now() });
+  function handleGesture(gesture, sample) {
+    gestureLog.push({ gesture, time: performance.now(), x: sample.x, y: sample.y, z: sample.z });
     if (gestureLog.length > MAX_LOG_ENTRIES) gestureLog.shift();
     renderLog();
   }
