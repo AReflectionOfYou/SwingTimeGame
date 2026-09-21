@@ -15,6 +15,10 @@
   const enableButton = document.getElementById('enable-motion');
   const statusLine = document.getElementById('status-line');
   const noteFlash = document.getElementById('note-flash');
+  const cantHearToggle = document.getElementById('cant-hear-toggle');
+  const cantHearPanel = document.getElementById('cant-hear-panel');
+  const cantHearStatus = document.getElementById('cant-hear-status');
+  const testToneButton = document.getElementById('test-tone-button');
 
   let flashTimer = null;
 
@@ -128,6 +132,21 @@
     } else {
       startMotion();
     }
+  });
+
+  cantHearToggle.addEventListener('click', () => {
+    cantHearPanel.hidden = !cantHearPanel.hidden;
+  });
+
+  testToneButton.addEventListener('click', () => {
+    bell.ring(440);
+    // The audio context only reflects the resume() from ring() a tick later.
+    setTimeout(() => {
+      cantHearStatus.textContent =
+        bell.ctx && bell.ctx.state === 'running'
+          ? "The phone just confirmed it played a tone. If you still didn't hear anything, check the items below."
+          : 'The browser blocked that tone — tap Play Test Tone again.';
+    }, 50);
   });
 
   renderTetrachord();

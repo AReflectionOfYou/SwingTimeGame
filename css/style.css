@@ -77,6 +77,30 @@ header.app-header h1 {
   border-radius: 999px;
 }
 
+.cant-hear-toggle {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid var(--danger);
+  background: transparent;
+  color: var(--danger);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.cant-hear-panel {
+  margin-top: 12px;
+  padding: 14px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+}
+
+.cant-hear-panel .primary-button {
+  margin: 10px 0;
+}
+
 .control-group {
   margin-bottom: 16px;
 }
