@@ -35,8 +35,19 @@
     <nav class="home-links">
       <a class="small-link" href="help.html">Help</a>
       <a class="small-link" href="debug.html">Debug</a>
+      <button type="button" class="small-link about-link" id="about-btn" aria-haspopup="dialog">About</button>
     </nav>
   </main>
+
+  <dialog class="about-dialog" id="about-dialog" aria-labelledby="about-title">
+    <p id="about-title">© 2026 Michael A. Heroux</p>
+    <p>Code is MIT licensed. Everything else is CC BY 4.0.</p>
+    <p class="about-links">
+      <a href="https://opensource.org/license/mit" target="_blank" rel="noopener">MIT License</a>
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>
+    </p>
+    <button type="button" class="btn" id="about-close">Close</button>
+  </dialog>
 
   <script src="js/config.js"></script>
   <script src="js/lanes.js"></script>
@@ -44,6 +55,25 @@
     document.getElementById('lane-dots').innerHTML = LANES.map(
       (l) => '<span style="background:' + l.color + '"></span>'
     ).join('');
+
+    // About panel: a native <dialog>, so Escape closes it for free.
+    (function () {
+      const dialog = document.getElementById('about-dialog');
+      const open = document.getElementById('about-btn');
+      if (typeof dialog.showModal !== 'function') {
+        open.hidden = true;
+        return;
+      }
+      open.addEventListener('click', () => dialog.showModal());
+      document.getElementById('about-close').addEventListener('click', () => dialog.close());
+      // A click on the backdrop lands on the dialog element itself, outside its box.
+      dialog.addEventListener('click', (e) => {
+        if (e.target !== dialog) return;
+        const r = dialog.getBoundingClientRect();
+        const inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+        if (!inside) dialog.close();
+      });
+    })();
   </script>
 </body>
 </html>
