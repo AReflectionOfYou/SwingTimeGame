@@ -145,6 +145,7 @@ class BellSynth {
       gain.disconnect();
     };
     this.voices.push(voice);
+    return voice;
   }
 
   // ---- Synthesized fallback --------------------------------------------
@@ -185,14 +186,19 @@ class BellSynth {
   // ---- Public ----------------------------------------------------------
 
   // volume: 0..1, default 0.8. when: an AudioContext time, to schedule ahead.
+  // Returns a handle for damp() when a recorded sample was played.
   ringNote(name, { volume = 0.8, when = 0 } = {}) {
     const sample = this.samples && this.samples[name];
-    if (sample) {
-      this._playSample(name, sample, volume * 1.25, when);
-      return;
-    }
+    if (sample) return this._playSample(name, sample, volume * 1.25, when);
     const note = NOTES[name];
     if (note) this.ring(note.freq, { volume, when });
+    return null;
+  }
+
+  // Stop a ringing note quickly, as a ringer damps a bell against the shoulder.
+  damp(voice, secs = 0.15) {
+    if (!voice || !this.ctx || voice.end <= this.ctx.currentTime) return;
+    fadeOut(voice, this.ctx.currentTime, secs);
   }
 }
 

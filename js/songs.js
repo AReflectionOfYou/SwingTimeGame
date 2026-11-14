@@ -131,9 +131,12 @@ function resolveArrangement(song, size, defaultLayouts) {
   });
 
   // A note held by two or more phones normally rings on all of them
-  // (doubling). Notes listed in "alternate" instead go to whichever holder
-  // has been idle longest, so a run of fast repeated notes is shared out.
+  // (doubling). Notes listed in "alternate" instead go to one holder: one
+  // that is free at that beat (not already ringing another note of the
+  // chord), and of those the one idle longest, so a run of fast repeated
+  // notes is shared out.
   const alternate = new Set(arr.alternate || []);
+  const isShared = (note) => alternate.has(note) && (holders[note] || []).length > 1;
   const lastCueBeat = {};
   const events = [];
   (arr.parts || []).forEach((partName) => {
@@ -145,22 +148,56 @@ function resolveArrangement(song, size, defaultLayouts) {
     partEvents(part).forEach((ev) => events.push({ ...ev, part: partName }));
   });
   events.sort((a, b) => a.beat - b.beat);
+  const byBeat = new Map();
+  events.forEach((ev) => {
+    if (!byBeat.has(ev.beat)) byBeat.set(ev.beat, []);
+    byBeat.get(ev.beat).push(ev);
+  });
 
   const cues = [];
-  events.forEach((ev) => {
-    let hs = holders[ev.note];
-    if (!hs) {
-      warnings.push(where + ': ' + ev.note + ' at beat ' + ev.beat + ' (' + ev.part + ') is not on any phone');
-      return;
-    }
-    if (alternate.has(ev.note) && hs.length > 1) {
-      const idle = (h) => (lastCueBeat[h.phone] === undefined ? -Infinity : lastCueBeat[h.phone]);
-      hs = [hs.reduce((best, h) => (idle(h) < idle(best) ? h : best))];
-    }
-    hs.forEach((h) => {
-      cues.push({ phone: h.phone, gesture: h.gesture, note: ev.note, beat: ev.beat, part: ev.part });
-      lastCueBeat[h.phone] = ev.beat;
+  const ring = (h, ev) => {
+    cues.push({ phone: h.phone, gesture: h.gesture, note: ev.note, beat: ev.beat, part: ev.part });
+    lastCueBeat[h.phone] = ev.beat;
+  };
+  byBeat.forEach((evs, beat) => {
+    const busy = new Set();
+    const shared = [];
+    evs.forEach((ev) => {
+      const hs = holders[ev.note];
+      if (!hs) {
+        warnings.push(where + ': ' + ev.note + ' at beat ' + beat + ' (' + ev.part + ') is not on any phone');
+      } else if (!isShared(ev.note)) {
+        hs.forEach((h) => {
+          ring(h, ev);
+          busy.add(h.phone);
+        });
+      } else if (!shared.some((s) => s.note === ev.note)) {
+        shared.push(ev); // the same note in two parts at once rings once
+      }
     });
+    if (!shared.length) return;
+    // Give each shared note a different free phone if at all possible
+    // (a tiny search; a chord has at most a handful of notes), trying the
+    // longest-idle holders first.
+    const idle = (h) => (lastCueBeat[h.phone] === undefined ? -Infinity : lastCueBeat[h.phone]);
+    const options = shared.map((ev) => holders[ev.note].slice().sort((a, b) => idle(a) - idle(b)));
+    let best = null;
+    const pick = [];
+    const search = (i, clashes) => {
+      if (best && clashes >= best.clashes) return;
+      if (i === shared.length) {
+        best = { clashes, pick: pick.slice() };
+        return;
+      }
+      options[i].forEach((h) => {
+        const clash = busy.has(h.phone) || pick.some((p) => p.phone === h.phone);
+        pick.push(h);
+        search(i + 1, clashes + (clash ? 1 : 0));
+        pick.pop();
+      });
+    };
+    search(0, 0);
+    best.pick.forEach((h, i) => ring(h, shared[i]));
   });
   (arr.notes || []).forEach((n) => {
     const note = layout[n.phone] && layout[n.phone][n.gesture];

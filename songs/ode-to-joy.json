@@ -2,48 +2,170 @@
   "title": "Ode to Joy",
   "bpm": 96,
   "beatsPerMeasure": 4,
-  "_about": "PROPOSED for owner review. Beethoven's tune (Symphony No. 9, 1824), melody checked note for note against the public-domain Mutopia hymn setting (G major, transposed to C). The accompaniment is our own simplified bell arrangement, not Beethoven's harmony: chord roots on beats 1 and 3, chord thirds (and the G7 Fa) on beats 2 and 4, and a high Do3 chime at the start of phrases. One beat = a quarter note.",
+  "_about": "PROPOSED for owner review. Beethoven's tune (Symphony No. 9, 1824) in the four-part hymn setting from the Mutopia Project (public domain, typeset by Peter Chubb, Mutopia-2009/08/05-528), transposed from G to C. Melody and alto are at written pitch; tenor and bass are moved up into the bells' lower octave (C5-C6), so the chords are Beethoven's but the low voices sit closer together than in the score. SIMPLIFIED for the 15 bells: (1) the alto, tenor and bass leave out their eighth notes (each dotted-quarter-plus-eighth becomes a half note), and a note they repeat within a bar is rung once and held, as handbell choirs often do; (2) four chromatic notes have no bell and are replaced by a chord tone: alto C# in bar 12 (held E), bass D# in bar 11 (B), tenor and bass F-natural in bar 13 (D and B), named in the G-major score. The melody is complete. One beat = a quarter note.",
   "parts": {
-    "melody":
-      "Mi2 Mi2 Fa2 Sol2 | Sol2 Fa2 Mi2 Re2 | Do2 Do2 Re2 Mi2 | Mi2/1.5 Re2/0.5 Re2/2 | Mi2 Mi2 Fa2 Sol2 | Sol2 Fa2 Mi2 Re2 | Do2 Do2 Re2 Mi2 | Re2/1.5 Do2/0.5 Do2/2 | Re2 Re2 Mi2 Do2 | Re2 Mi2/0.5 Fa2/0.5 Mi2 Do2 | Re2 Mi2/0.5 Fa2/0.5 Mi2 Re2 | Do2 Re2 Sol/2 | Mi2 Mi2 Fa2 Sol2 | Sol2 Fa2 Mi2 Re2 | Do2 Do2 Re2 Mi2 | Re2/1.5 Do2/0.5 Do2/2",
-    "bass":
-      "Do/2 Sol/2 | Sol/2 Re/2 | Do/2 Sol/2 | Sol/2 Re/2 | Do/2 Sol/2 | Sol/2 Re/2 | Do/2 Sol/2 | Sol/2 Do/2 | Sol/2 Do/2 | Sol/2 Do/2 | Sol/2 Do/2 | La/2 Sol/2 | Do/2 Sol/2 | Sol/2 Re/2 | Do/2 Sol/2 | Sol/2 Do/2",
-    "chords":
-      "- Mi - Mi | - Ti - Fa | - Mi - Mi | - Ti - Fa | - Mi - Mi | - Ti - Fa | - Mi - Mi | - Ti - Mi | - Ti - Mi | - Ti - Mi | - Ti - Mi | - Mi - Ti | - Mi - Mi | - Ti - Fa | - Mi - Mi | - Ti - -",
-    "chime":
-      "Do3/4 | -/4 | -/4 | -/4 | Do3/4 | -/4 | -/4 | -/2 Do3/2 | -/4 | -/4 | -/4 | -/4 | Do3/4 | -/4 | -/4 | -/2 Do3/2"
+    "melody": "Mi2 Mi2 Fa2 Sol2 | Sol2 Fa2 Mi2 Re2 | Do2 Do2 Re2 Mi2 | Mi2/1.5 Re2/0.5 Re2/2 | Mi2 Mi2 Fa2 Sol2 | Sol2 Fa2 Mi2 Re2 | Do2 Do2 Re2 Mi2 | Re2/1.5 Do2/0.5 Do2/2 | Re2 Re2 Mi2 Do2 | Re2 Mi2/0.5 Fa2/0.5 Mi2 Do2 | Re2 Mi2/0.5 Fa2/0.5 Mi2 Re2 | Do2 Re2 Sol/2 | Mi2 Mi2 Fa2 Sol2 | Sol2 Fa2 Mi2 Re2 | Do2 Do2 Re2 Mi2 | Re2/1.5 Do2/0.5 Do2/2",
+    "alto": "Do2/2 Re2 Do2 | Do2/3 Ti | Sol/2 Ti Do2 | Do2/2 Ti/2 | Do2/2 Re2 Do2 | Do2/3 Ti | Sol/2 Ti Do2 | Do2 Ti Sol/2 | Sol/4 | Sol/4 | Sol/2 Ti/2 | La/2 Sol/2 | Sol Do2 Re2/2 | Mi2 Do2/2 La | La Sol Ti Do2 | Do2 Ti Do2/2",
+    "tenor": "Sol/2 Fa Mi | La/2 Sol/2 | Mi/2 Sol/2 | Sol/4 | Sol/2 Fa Mi | La/2 Sol/2 | Mi/2 Sol/2 | Sol/2 Mi/2 | Ti/2 Do La | Ti Do/2 La | Ti/3 Mi | Mi Re Do Ti | Do Sol/3 | Do2/2 Sol Fa | Do/2 Fa Sol | Sol/2 Mi/2",
+    "bass": "Do/4 | La/2 Do Sol | Mi/2 Re Do | Sol/4 | Do/4 | La/2 Do Sol | Mi/2 Re Do | Sol/2 Do/2 | Sol/4 | Sol/4 | Sol/2 Mi/2 | La Re Sol/2 | Do/2 Mi/2 | La/2 Do Fa | Fa Mi Re Do | Sol/2 Do/2"
   },
-  "_arrangements": "Re2, Do2 and Sol2 sit on both melody phones and take turns ('alternate'), so the quick repeats after each dotted note (Re2 Re2, Do2 Do2) pass between two players; Mi2 stays on phone 1. The low Sol near the end of the melody lands on the same beat as a bass Sol, so the bass phone rings it. Every phone has at least 0.6 s between swings. 2 phones: melody only. 3 phones: melody and bass. 4 phones: everything, which is also what the Demo plays.",
+  "_arrangements": "2 phones: melody only. 3 phones: melody and bass. 4 phones: all four voices of the hymn, which is also what the Demo plays. Notes on two phones take turns ('alternate'): each time, the note goes to a holder that is not already ringing another note of that chord, idle longest first.",
   "arrangements": {
     "2": {
-      "parts": ["melody"],
-      "alternate": ["Re2", "Do2"],
+      "parts": [
+        "melody"
+      ],
+      "alternate": [
+        "Do2",
+        "Re2"
+      ],
       "layout": {
-        "A": {"forward": "Mi2", "back": "Re2", "left": "Do2", "right": "Sol2"},
-        "B": {"forward": "Re2", "back": "Fa2", "left": "Do2", "right": "Sol"}
+        "A": {
+          "forward": "Mi2",
+          "back": "Re2",
+          "left": "Do2",
+          "right": "Sol2"
+        },
+        "B": {
+          "forward": "Re2",
+          "back": "Fa2",
+          "left": "Do2",
+          "right": "Sol"
+        }
       }
     },
     "3": {
-      "parts": ["melody", "bass"],
-      "alternate": ["Re2", "Do2", "Sol2"],
+      "parts": [
+        "melody",
+        "bass"
+      ],
+      "alternate": [
+        "Do2"
+      ],
       "layout": {
-        "A": {"forward": "Mi2", "back": "Re2", "left": "Do2", "right": "Sol2"},
-        "B": {"forward": "Re2", "back": "Fa2", "left": "Do2", "right": "Sol2"},
-        "C": {"forward": "Sol", "back": "Do", "left": "Re", "right": "La"}
+        "A": {
+          "forward": "Mi2",
+          "back": "Re2",
+          "left": "Do2",
+          "right": "Sol2"
+        },
+        "B": {
+          "forward": "Do",
+          "back": "Sol",
+          "left": "Mi",
+          "right": "Re"
+        },
+        "C": {
+          "forward": "Fa2",
+          "back": "Do2",
+          "left": "La",
+          "right": "Fa"
+        }
       }
     },
     "4": {
-      "parts": ["melody", "bass", "chords", "chime"],
-      "alternate": ["Re2", "Do2", "Sol2"],
+      "parts": [
+        "melody",
+        "alto",
+        "tenor",
+        "bass"
+      ],
+      "alternate": [
+        "Do2",
+        "Fa",
+        "Mi",
+        "Re2"
+      ],
       "layout": {
-        "A": {"forward": "Mi2", "back": "Re2", "left": "Do2", "right": "Sol2"},
-        "B": {"forward": "Re2", "back": "Fa2", "left": "Do2", "right": "Sol2"},
-        "C": {"forward": "Sol", "back": "Do", "left": "Re", "right": "La"},
-        "D": {"forward": "Mi", "back": "Ti", "left": "Fa", "right": "Do3"}
+        "A": {
+          "forward": "Do",
+          "back": "Mi",
+          "left": "Sol2",
+          "right": "Re"
+        },
+        "B": {
+          "forward": "Do2",
+          "back": "Ti",
+          "left": "La",
+          "right": "Fa"
+        },
+        "C": {
+          "forward": "Mi2",
+          "back": "Re2",
+          "left": "Mi",
+          "right": "Fa"
+        },
+        "D": {
+          "forward": "Sol",
+          "back": "Do2",
+          "left": "Fa2",
+          "right": "Re2"
+        }
       }
     }
   },
   "melody": [
-    "Mi2", "Mi2", "Fa2", "Sol2", "Sol2", "Fa2", "Mi2", "Re2", "Do2", "Do2", "Re2", "Mi2", "Mi2", "Re2", "Re2", "Mi2", "Mi2", "Fa2", "Sol2", "Sol2", "Fa2", "Mi2", "Re2", "Do2", "Do2", "Re2", "Mi2", "Re2", "Do2", "Do2", "Re2", "Re2", "Mi2", "Do2", "Re2", "Mi2", "Fa2", "Mi2", "Do2", "Re2", "Mi2", "Fa2", "Mi2", "Re2", "Do2", "Re2", "Sol", "Mi2", "Mi2", "Fa2", "Sol2", "Sol2", "Fa2", "Mi2", "Re2", "Do2", "Do2", "Re2", "Mi2", "Re2", "Do2", "Do2"
+    "Mi2",
+    "Mi2",
+    "Fa2",
+    "Sol2",
+    "Sol2",
+    "Fa2",
+    "Mi2",
+    "Re2",
+    "Do2",
+    "Do2",
+    "Re2",
+    "Mi2",
+    "Mi2",
+    "Re2",
+    "Re2",
+    "Mi2",
+    "Mi2",
+    "Fa2",
+    "Sol2",
+    "Sol2",
+    "Fa2",
+    "Mi2",
+    "Re2",
+    "Do2",
+    "Do2",
+    "Re2",
+    "Mi2",
+    "Re2",
+    "Do2",
+    "Do2",
+    "Re2",
+    "Re2",
+    "Mi2",
+    "Do2",
+    "Re2",
+    "Mi2",
+    "Fa2",
+    "Mi2",
+    "Do2",
+    "Re2",
+    "Mi2",
+    "Fa2",
+    "Mi2",
+    "Re2",
+    "Do2",
+    "Re2",
+    "Sol",
+    "Mi2",
+    "Mi2",
+    "Fa2",
+    "Sol2",
+    "Sol2",
+    "Fa2",
+    "Mi2",
+    "Re2",
+    "Do2",
+    "Do2",
+    "Re2",
+    "Mi2",
+    "Re2",
+    "Do2",
+    "Do2"
   ]
 }

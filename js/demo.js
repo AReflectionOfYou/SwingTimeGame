@@ -13,6 +13,7 @@
   let arrangement = null;
   let loopTimer = null;
   let soundOn = false;
+  const ringing = {}; // part name → its last bell voice
 
   const clock = new BeatClock({
     bpm: 90,
@@ -21,7 +22,12 @@
       view.draw();
       if (soundOn && arrangement) {
         arrangement.cues.forEach((c) => {
-          if (c.beat > prev && c.beat <= pos) bell.ringNote(c.note, { volume: 0.55 });
+          if (c.beat <= prev || c.beat > pos) return;
+          // Each part damps its previous bell when it moves on, so chords
+          // don't blur into the next one.
+          const before = ringing[c.part];
+          if (before && before.name !== c.note) bell.damp(before);
+          ringing[c.part] = bell.ringNote(c.note, { volume: 0.55 }) || before;
         });
       }
       if (arrangement && pos > arrangement.lastBeat + 2) loop();
