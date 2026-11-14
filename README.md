@@ -22,7 +22,17 @@ Play it at <https://areflectionofyou.github.io/SwingTimeGame/>.
 - Songs: `songs/*.json`, listed in order in `songs/index.json` (the first is the Demo song)
 - Default note layouts for 1–4 phones: `data/default-layouts.json`
 
-To test locally: `python3 -m http.server` in this folder, then open <http://localhost:8000/>.
+### Printed QR codes
+
+Every QR code links to the address in `baseUrl` (`js/config.js`), currently
+`https://areflectionofyou.github.io/SwingTimeGame/`. **If the repository is renamed or moved,
+printed codes stop working** — GitHub Pages does not redirect the old address. After a move,
+update `baseUrl` and reprint. Codes shown on the shared screen are generated fresh each time,
+so they follow `baseUrl` automatically.
+
+To test locally: `python3 -m http.server` in this folder, then open <http://localhost:8000/>. Codes still point at the live site; to have phones
+load your local copy, temporarily set `baseUrl` to `''` and open the host page via your
+computer's network address.
 
 ## Third-party code
 

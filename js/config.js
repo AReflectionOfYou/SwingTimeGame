@@ -4,12 +4,17 @@
 const APP_CONFIG = {
   name: 'Swing Time',
 
-  // Base address that every QR code link is built from. Leave empty to use
-  // the folder the shared screen was loaded from (correct on GitHub Pages and
-  // on a LAN test server). Set it explicitly, e.g.
-  //   'https://areflectionofyou.github.io/SwingTimeGame/'
-  // before printing codes, so printed codes survive a move. Must end in '/'.
-  baseUrl: '',
+  // Base address that every QR code link is built from. Must end in '/'.
+  //
+  // WARNING: printed QR codes carry this address. If the repository is
+  // renamed or moved, GitHub Pages does NOT redirect the old address, so
+  // every printed code stops working. Update this value and reprint after
+  // any move.
+  //
+  // Set to '' to use the folder the shared screen was loaded from instead —
+  // useful when testing unpublished changes from a computer on the local
+  // network, since phones would otherwise open the live site.
+  baseUrl: 'https://areflectionofyou.github.io/SwingTimeGame/',
 
   // Prefix for per-device preferences in localStorage (hand, thresholds,
   // look-ahead). Kept separate from `name` so a rename doesn't reset them.
