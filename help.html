@@ -1,115 +1,96 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-page-title="Help">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
   <title>Swing Time — Help</title>
-  <meta name="theme-color" content="#101418" />
+  <meta name="theme-color" content="#0b0e13" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Swing Time" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="icons/icon-180.png" />
   <link rel="icon" href="icons/icon-192.png" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header class="app-header">
-    <h1>Help</h1>
-    <nav class="header-links">
-      <a class="nav-link" href="index.html">Play</a>
-      <a class="nav-link" href="score.html">Scores</a>
-      <a class="nav-link" href="debug.html">Debug</a>
-    </nav>
-  </header>
+  <main class="page prose">
+    <header class="page-header">
+      <h1>Help</h1>
+      <nav><a class="small-link" href="index.html">Home</a></nav>
+    </header>
 
-  <main class="help-content">
     <section class="panel">
-      <p class="section-title">What this is</p>
+      <p class="section-title">The idea</p>
       <p>
-        Swing Time turns a phone into half of a two-person handbell choir. One
-        octave (do–re–mi–fa–sol–la–ti–do) is split into two four-note
-        tetrachords. Each phone plays one tetrachord by detecting swing
-        gestures with the motion sensors — no pairing or syncing between
-        phones required.
+        Each phone is a handbell with four notes. A shared screen (iPad, laptop, or a TV through AirPlay) shows
+        one colored lane per phone. Blocks slide toward a white line; when a block in your color reaches the
+        line, make the swing its arrow shows.
       </p>
+    </section>
+
+    <section class="panel">
+      <p class="section-title">Getting started</p>
+      <ol>
+        <li>On the shared screen, open <strong>Host a game</strong>, pick a song and the number of phones.</li>
+        <li>Each player scans the code in their color with the iPhone camera.</li>
+        <li>On the phone, tap <strong>Enable Motion</strong> and allow it.</li>
+        <li>The host presses <strong>Start</strong>. After 3, 2, 1 the score starts moving.</li>
+      </ol>
+      <p>Scanned the wrong code? Just scan the right one.</p>
     </section>
 
     <section class="panel">
       <p class="section-title">How to hold the phone</p>
-      <p>
-        Hold the phone like a hatchet or hammer, gripped sideways rather than
-        upright like you're reading it:
-      </p>
+      <p>Hold it like a hatchet or a hammer — gripped sideways, not upright as if reading it.</p>
       <ul>
-        <li><strong>Right-handed:</strong> the screen's left edge points down.</li>
-        <li><strong>Left-handed:</strong> mirrored — the screen's right edge points down.</li>
+        <li><strong>Right hand:</strong> the screen's left edge points down.</li>
+        <li><strong>Left hand:</strong> mirrored — the right edge points down. Pick <em>Left hand</em> at the bottom
+          of the player screen.</li>
       </ul>
-      <p>
-        Set the matching option in the <strong>Hand</strong> selector on the
-        Play screen — it's what tells the app which physical direction counts
-        as "up" versus "down."
-      </p>
     </section>
 
     <section class="panel">
-      <p class="section-title">The four motions</p>
-      <ul>
-        <li><strong>Down</strong> — chop the phone sharply downward.</li>
-        <li><strong>Up</strong> — swing it back up.</li>
-        <li>
-          <strong>Left / Right</strong> — swing sideways. Left-handed: screen
-          leading is Left, back leading is Right. Right-handed: mirrored —
-          screen leading is Right, back leading is Left.
-        </li>
-      </ul>
-      <p>Each motion always rings the same note slot, regardless of hand:</p>
+      <p class="section-title">The four swings</p>
       <table class="help-table">
-        <thead>
-          <tr>
-            <th>Motion</th>
-            <th>Lower</th>
-            <th>Upper</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Arrow</th><th>Swing</th></tr></thead>
         <tbody>
-          <tr><td>Down</td><td>Do</td><td>Sol</td></tr>
-          <tr><td>Up</td><td>Re</td><td>La</td></tr>
-          <tr><td>Left</td><td>Mi</td><td>Ti</td></tr>
-          <tr><td>Right</td><td>Fa</td><td>Do</td></tr>
+          <tr><td>↑</td><td>Swing forward — a firm chop forward and down</td></tr>
+          <tr><td>↓</td><td>Swing back — bring it sharply back up</td></tr>
+          <tr><td>←</td><td>Snap left</td></tr>
+          <tr><td>→</td><td>Snap right</td></tr>
         </tbody>
       </table>
+      <p>Your phone shows which note each swing plays. Tap a note to hear it without swinging.</p>
     </section>
 
     <section class="panel">
-      <p class="section-title">Play screen controls</p>
-      <ul>
-        <li><strong>Hand</strong> — Right-handed or Left-handed. Must match your actual grip.</li>
-        <li><strong>Tetrachord</strong> — Lower or Upper. Picks which half of the octave you're playing.</li>
-        <li>
-          <strong>Note chips</strong> (Down/Up/Left/Right, showing the current
-          note names) — tap one to ring that note directly, without swinging.
-          Handy for checking your notes before playing.
-        </li>
-        <li>
-          <strong>Enable Motion / Stop Motion</strong> — turns gesture
-          detection on or off. Tap Stop Motion any time to silence the phone
-          without leaving the page.
-        </li>
-      </ul>
+      <p class="section-title">Toddler mode</p>
       <p>
-        You don't need to watch the screen while playing — the app is
-        designed to be used by feel while reading a paper score.
+        Any wave at all plays the next note of the tune, so it always comes out right. To leave, a grown-up
+        presses and holds the ✕ in the corner for two seconds.
       </p>
     </section>
 
     <section class="panel">
-      <p class="section-title">If gestures misfire</p>
+      <p class="section-title">Can't hear it?</p>
+      <ul>
+        <li>Press volume up while the page is open.</li>
+        <li>Check the ringer switch on the side of the phone.</li>
+        <li>If headphones or a Bluetooth speaker are connected, the sound goes there.</li>
+        <li>Tap a note on the player screen to test.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <p class="section-title">Swings misfire?</p>
       <p>
-        Open the <a class="inline-link" href="debug.html">Debug</a> screen for
-        a live sensor readout, a log of detected gestures, and sliders to
-        adjust the sensitivity thresholds without editing any code.
+        Open <a href="debug.html">Debug</a> for a live sensor readout, a log of detected swings, and sliders for
+        the sensitivity thresholds.
       </p>
     </section>
   </main>
+  <script src="js/config.js"></script>
 </body>
 </html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" data-page-title="Host">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <title>Swing Time — Host</title>
+  <meta name="theme-color" content="#0b0e13" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Swing Time" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="host">
+    <header class="host-top">
+      <div>
+        <h1 id="host-title" data-app-name>Swing Time</h1>
+        <div class="subtitle" id="host-subtitle"></div>
+      </div>
+      <nav class="controls" style="margin-top:0">
+        <button type="button" class="btn btn-ghost" id="back-btn" hidden>← Back</button>
+        <a class="btn btn-ghost" href="index.html" id="home-link">Home</a>
+      </nav>
+    </header>
+
+    <!-- Step 1: song -->
+    <section id="step-song" hidden>
+      <h2 class="step-title">Pick a song</h2>
+      <div class="song-grid" id="song-grid"></div>
+    </section>
+
+    <!-- Step 2: group size -->
+    <section id="step-size" hidden>
+      <h2 class="step-title">How many phones?</h2>
+      <div class="size-row" id="size-row"></div>
+    </section>
+
+    <!-- Step 3: QR codes -->
+    <section id="step-codes" hidden style="flex:1;display:flex;flex-direction:column">
+      <div class="qr-grid" id="qr-grid"></div>
+      <div class="qr-footer">
+        <div class="qr-help">
+          Each player scans the code in <strong>their color</strong> with the iPhone camera, then taps
+          <strong>Enable Motion</strong>.
+          <span class="qr-url" id="qr-url"></span>
+        </div>
+        <button type="button" class="btn btn-primary btn-big" id="start-btn">Start ▶</button>
+      </div>
+    </section>
+
+    <!-- Step 3 (Toddler): one code -->
+    <section id="step-toddler" hidden style="flex:1;display:flex;flex-direction:column">
+      <div class="toddler-host">
+        <div class="qr-card neutral" id="toddler-qr"></div>
+        <div>
+          <h2 class="step-title">Wave to play</h2>
+          <p class="qr-help">
+            Scan with the iPhone camera, tap the button, then move the phone any way at all. Each wave plays the
+            next note of the tune. Any number of phones can scan this code.
+          </p>
+          <div class="melody-trail" id="melody-trail"></div>
+          <span class="qr-url" id="toddler-url"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 4: the lane score -->
+    <section id="step-score" hidden style="flex:1;display:flex;flex-direction:column">
+      <div class="score-wrap" id="score-wrap">
+        <canvas id="score-canvas"></canvas>
+        <div class="countdown" id="countdown" hidden></div>
+        <div class="score-message" id="score-done" hidden>
+          <div>🎉 Well rung!</div>
+          <button type="button" class="btn btn-primary btn-big" id="again-btn">Play again</button>
+        </div>
+      </div>
+      <div class="controls">
+        <button type="button" class="btn btn-primary" id="play-btn">Pause</button>
+        <button type="button" class="btn" id="restart-btn">Restart</button>
+        <label class="slider">Tempo
+          <input type="range" id="tempo" min="40" max="160" step="1" />
+          <output id="tempo-out"></output>
+        </label>
+        <label class="slider">Look ahead
+          <input type="range" id="lookahead" min="2" max="16" step="1" />
+          <output id="lookahead-out"></output>
+        </label>
+        <label class="check"><input type="checkbox" id="names" /> Note names</label>
+        <span class="spacer"></span>
+        <button type="button" class="btn btn-ghost" id="codes-btn">Show codes</button>
+        <button type="button" class="btn btn-ghost" id="fullscreen-btn" hidden>Full screen</button>
+      </div>
+    </section>
+
+    <p id="host-error" class="warn" hidden></p>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/notes.js"></script>
+  <script src="js/lanes.js"></script>
+  <script src="js/songs.js"></script>
+  <script src="js/vendor/qrcode.js"></script>
+  <script src="js/qr.js"></script>
+  <script src="js/lane-view.js"></script>
+  <script src="js/wake-lock.js"></script>
+  <script src="js/host.js"></script>
+</body>
+</html>

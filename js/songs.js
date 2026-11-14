@@ -1,16 +1,197 @@
-// Registry of song JSON files to load, in tier order.
-const SONG_FILES = [
-  'songs/hot-cross-buns.json',
-  'songs/au-clair-de-la-lune.json',
-  'songs/mary-had-a-little-lamb.json',
-  'songs/merrily-we-roll-along.json',
-  'songs/twinkle-twinkle-little-star.json',
-  'songs/row-row-row-your-boat.json',
-  'songs/ode-to-joy.json',
-];
+// Loads song data and resolves an arrangement into what the screens need:
+// which phones exist, what each phone's gestures play, and a time-ordered
+// list of cues { phone, gesture, note, beat }.
+//
+// Song file shape (see songs/*.json):
+//   title, bpm, beatsPerMeasure
+//   parts:        { name: beat-grid string | [{ note, beat }] }
+//   arrangements: { "1".."4": { layout: {A:{forward,back,left,right},…} | "default",
+//                               parts: [part names],
+//                               notes: [{ phone, gesture, beat }] (optional, explicit) } }
+//   melody:       [note names] — optional; enables Toddler mode
+//
+// A part note is rung by every phone whose layout holds that note (so a note
+// placed on two phones is deliberately doubled).
 
-function loadSongs() {
-  return Promise.all(
-    SONG_FILES.map((path) => fetch(path).then((res) => res.json()))
-  );
+const SONG_SIZES = ['1', '2', '3', '4'];
+
+let _defaultLayoutsPromise = null;
+let _songIndexPromise = null;
+const _songCache = {};
+
+function fetchJson(path) {
+  return fetch(path, { cache: 'no-cache' }).then((res) => {
+    if (!res.ok) throw new Error('Could not load ' + path + ' (' + res.status + ')');
+    return res.json();
+  });
+}
+
+function loadDefaultLayouts() {
+  if (!_defaultLayoutsPromise) _defaultLayoutsPromise = fetchJson('data/default-layouts.json');
+  return _defaultLayoutsPromise;
+}
+
+function loadSongIndex() {
+  if (!_songIndexPromise) _songIndexPromise = fetchJson('songs/index.json').then((d) => d.songs);
+  return _songIndexPromise;
+}
+
+function loadSong(id) {
+  if (!/^[a-z0-9-]+$/.test(id || '')) return Promise.reject(new Error('Unknown song'));
+  if (!_songCache[id]) {
+    _songCache[id] = fetchJson('songs/' + id + '.json').then((song) => {
+      song.id = id;
+      return song;
+    });
+  }
+  return _songCache[id];
+}
+
+function loadAllSongs() {
+  return loadSongIndex().then((ids) => Promise.all(ids.map(loadSong)));
+}
+
+// "Mi Re Do - | Mi …" → [{ note, beat }]
+function parseGrid(grid) {
+  const events = [];
+  let beat = 0;
+  grid
+    .split(/\s+/)
+    .filter(Boolean)
+    .forEach((tok) => {
+      if (tok === '|') return;
+      if (tok !== '-' && tok !== '.') events.push({ note: tok, beat });
+      beat += 1;
+    });
+  return events;
+}
+
+function partEvents(part) {
+  if (typeof part === 'string') return parseGrid(part);
+  if (Array.isArray(part)) return part;
+  return [];
+}
+
+function stripComments(obj) {
+  const out = {};
+  Object.keys(obj || {}).forEach((k) => {
+    if (!k.startsWith('_')) out[k] = obj[k];
+  });
+  return out;
+}
+
+function validateLayout(layout, warnings, where) {
+  Object.keys(layout).forEach((phone) => {
+    if (!laneByLetter(phone)) warnings.push(where + ': unknown phone "' + phone + '"');
+    const slots = layout[phone];
+    const seen = new Set();
+    GESTURES.forEach((g) => {
+      const note = slots[g];
+      if (!isNoteName(note)) warnings.push(where + ' ' + phone + '.' + g + ': "' + note + '" is not a note');
+      if (seen.has(note)) warnings.push(where + ' ' + phone + ': "' + note + '" appears twice');
+      seen.add(note);
+    });
+  });
+}
+
+// Returns { size, phones: ['A',…], layout, cues: [...], lastBeat, warnings }
+// or null when the song has no arrangement for that size.
+function resolveArrangement(song, size, defaultLayouts) {
+  const key = String(size);
+  const arr = song.arrangements && song.arrangements[key];
+  if (!arr) return null;
+  const warnings = [];
+  const where = song.title + ' [' + key + ' phone' + (key === '1' ? '' : 's') + ']';
+
+  let layout = arr.layout;
+  if (layout === 'default' || !layout) layout = defaultLayouts && defaultLayouts[key];
+  layout = stripComments(layout);
+  validateLayout(layout, warnings, where);
+
+  const phones = LANES.map((l) => l.letter).slice(0, Number(key));
+  phones.forEach((p) => {
+    if (!layout[p]) warnings.push(where + ': no layout for phone ' + p);
+  });
+
+  // note → [{ phone, gesture }]
+  const holders = {};
+  phones.forEach((phone) => {
+    GESTURES.forEach((gesture) => {
+      const note = layout[phone] && layout[phone][gesture];
+      if (!note) return;
+      (holders[note] = holders[note] || []).push({ phone, gesture });
+    });
+  });
+
+  const cues = [];
+  (arr.parts || []).forEach((partName) => {
+    const part = song.parts && song.parts[partName];
+    if (!part) {
+      warnings.push(where + ': missing part "' + partName + '"');
+      return;
+    }
+    partEvents(part).forEach((ev) => {
+      const hs = holders[ev.note];
+      if (!hs) {
+        warnings.push(where + ': ' + ev.note + ' at beat ' + ev.beat + ' (' + partName + ') is not on any phone');
+        return;
+      }
+      hs.forEach((h) => cues.push({ phone: h.phone, gesture: h.gesture, note: ev.note, beat: ev.beat, part: partName }));
+    });
+  });
+  (arr.notes || []).forEach((n) => {
+    const note = layout[n.phone] && layout[n.phone][n.gesture];
+    if (!note) {
+      warnings.push(where + ': explicit note ' + n.phone + '.' + n.gesture + ' has no note');
+      return;
+    }
+    cues.push({ phone: n.phone, gesture: n.gesture, note, beat: n.beat, part: 'notes' });
+  });
+
+  // Drop exact duplicates; flag a phone asked to make two different swings
+  // at the same moment.
+  const seen = new Map();
+  const unique = [];
+  cues.forEach((c) => {
+    const k = c.phone + '@' + c.beat;
+    const prev = seen.get(k);
+    if (prev) {
+      if (prev.gesture !== c.gesture) {
+        warnings.push(where + ': phone ' + c.phone + ' has two notes at beat ' + c.beat + ' (' + prev.note + ', ' + c.note + ')');
+      }
+      return;
+    }
+    seen.set(k, c);
+    unique.push(c);
+  });
+  unique.sort((a, b) => a.beat - b.beat || a.phone.localeCompare(b.phone));
+
+  const lastBeat = unique.length ? unique[unique.length - 1].beat : 0;
+  warnings.forEach((w) => console.warn('[songs] ' + w));
+  return { size: Number(key), phones, layout, cues: unique, lastBeat, warnings };
+}
+
+function availableSizes(song) {
+  return SONG_SIZES.filter((s) => song.arrangements && song.arrangements[s]).map(Number);
+}
+
+function hasToddler(song) {
+  return Array.isArray(song.melody) && song.melody.length > 0;
+}
+
+// --- Links carried by QR codes ---------------------------------------------
+
+function playerLink(songId, size, playerNumber) {
+  const url = new URL('play.html', appBaseUrl());
+  url.searchParams.set('song', songId);
+  url.searchParams.set('size', String(size));
+  url.searchParams.set('player', String(playerNumber));
+  return url.href;
+}
+
+function toddlerLink(songId) {
+  const url = new URL('play.html', appBaseUrl());
+  url.searchParams.set('song', songId);
+  url.searchParams.set('mode', 'toddler');
+  return url.href;
 }

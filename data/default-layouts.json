@@ -1,0 +1,29 @@
+{
+  "_about": "PROPOSED default note layouts for 1 to 4 phones, for owner review. A song can say \"layout\": \"default\" to use these, or give its own layout. Keys starting with _ are comments. Each phone (A-D) holds exactly four notes, one per gesture; forward and back carry each phone's most-used notes.",
+
+  "1": {
+    "_why": "Do Re Mi Sol covers the opening of most simple tunes. Fa, La and Ti are missing, so most songs need their own 1-phone layout.",
+    "A": { "forward": "Do", "back": "Mi", "left": "Re", "right": "Sol" }
+  },
+
+  "2": {
+    "_why": "Split by chord role, as the spec suggests: A holds the anchors (Do, Re, Sol, high Sol), B the colors (Mi, Fa, La, high Do). Every major chord gets at least two of its notes on different phones. Trade-offs: Ti is not on either phone; Do-Re and Mi-Fa are neighbors on the same phone, so some stepwise runs stay with one player.",
+    "A": { "forward": "Do", "back": "Sol", "left": "Re", "right": "Sol2" },
+    "B": { "forward": "Mi", "back": "La", "left": "Fa", "right": "Do2" }
+  },
+
+  "3": {
+    "_why": "Do up to high Sol (12 notes). Root, third and fifth of the I, IV and V chords (Do-Mi-Sol, Fa-La-Do, Sol-Ti-Re) always fall on three different phones, and each note keeps its octave on the same phone. Trade-offs: Do-Re, Mi-Fa and Sol-La are neighbors on the same phone; La2, Ti2 and Do3 are not available.",
+    "A": { "forward": "Do", "back": "Re", "left": "Do2", "right": "Re2" },
+    "B": { "forward": "Mi", "back": "Fa", "left": "Ti", "right": "Mi2" },
+    "C": { "forward": "Sol", "back": "La", "left": "Sol2", "right": "Fa2" }
+  },
+
+  "4": {
+    "_why": "All 15 notes, plus Sol doubled on A and D as a safety net. I, IV, V, ii and vi chords all fall on different phones, and octave families stay together (A = the Do bell, B = Re/Mi, C = Fa/Ti, D = Sol/La). Trade-offs: Re-Mi and Sol-La are neighbors on the same phone, so a stepwise melody passes between players less often than with a strict interleave.",
+    "A": { "forward": "Do", "back": "Sol", "left": "Do2", "right": "Do3" },
+    "B": { "forward": "Mi", "back": "Re", "left": "Mi2", "right": "Re2" },
+    "C": { "forward": "Fa", "back": "Ti", "left": "Fa2", "right": "Ti2" },
+    "D": { "forward": "Sol", "back": "La", "left": "Sol2", "right": "La2" }
+  }
+}

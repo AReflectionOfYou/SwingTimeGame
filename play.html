@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" data-page-title="Play">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <title>Swing Time — Play</title>
+  <meta name="theme-color" content="#0b0e13" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Swing Time" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Player: configured from the QR link (?song=…&size=…&player=…) -->
+  <main class="player" id="player" hidden>
+    <div class="who">
+      <div class="num" id="p-num"></div>
+      <div class="color-name" id="p-color"></div>
+      <div class="song-name" id="p-song"></div>
+    </div>
+
+    <div class="note-cross" id="note-cross">
+      <div class="note-center" id="note-center" aria-live="polite"></div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn btn-primary btn-big" id="motion-btn">Enable Motion</button>
+      <div class="status" id="p-status"></div>
+      <div class="mute-tip">No sound? Turn the volume up. Tap a note to test it.</div>
+    </div>
+
+    <footer class="player-footer">
+      <div class="seg" id="hand-seg" role="group" aria-label="Hand">
+        <button type="button" data-hand="right"><span>Right hand</span></button>
+        <button type="button" data-hand="left"><span>Left hand</span></button>
+      </div>
+      <div class="player-switch" id="player-switch" aria-label="Switch player"></div>
+      <div style="display:flex;gap:14px">
+        <a href="play.html" id="change-link">Change</a>
+        <a href="debug.html" id="debug-link">Debug</a>
+        <a href="index.html">Home</a>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Manual setup, when opened without a code -->
+  <main class="page" id="setup" hidden>
+    <header class="page-header">
+      <h1>Ring on this phone</h1>
+      <nav><a class="small-link" href="index.html">Home</a></nav>
+    </header>
+    <section class="panel setup-grid">
+      <label>Song
+        <select id="setup-song"></select>
+      </label>
+      <label>Number of phones
+        <select id="setup-size"></select>
+      </label>
+      <div>
+        <p class="section-title">Which player are you?</p>
+        <div class="choice-row" id="setup-player"></div>
+      </div>
+      <button type="button" class="btn btn-primary btn-big" id="setup-go">Ring as this player</button>
+    </section>
+    <p class="small-link">Tip: at a gathering, use <strong>Host a game</strong> on the shared screen instead — each
+      phone just scans its code.</p>
+  </main>
+
+  <!-- Toddler mode (?song=…&mode=toddler) -->
+  <main class="toddler" id="toddler" hidden>
+    <div class="toddler-title" id="t-title"></div>
+    <svg class="bell" id="t-bell" viewBox="0 0 200 220" aria-hidden="true">
+      <circle cx="100" cy="18" r="12" fill="#8a5a00" />
+      <path d="M100 26c-44 0-62 40-62 86 0 30-10 46-24 58h172c-14-12-24-28-24-58 0-46-18-86-62-86z"
+        fill="#ffcf33" stroke="#8a5a00" stroke-width="6" stroke-linejoin="round" />
+      <path d="M62 112c0-30 10-56 34-64" fill="none" stroke="#fff6c8" stroke-width="9" stroke-linecap="round"
+        opacity="0.8" />
+      <rect x="10" y="166" width="180" height="16" rx="8" fill="#e6a800" stroke="#8a5a00" stroke-width="6" />
+      <circle cx="100" cy="200" r="16" fill="#8a5a00" />
+    </svg>
+    <button type="button" class="btn btn-big start-btn" id="t-start">Enable Motion</button>
+    <div class="toddler-status" id="t-status"></div>
+    <div class="song-list" id="t-songs" hidden></div>
+    <button type="button" class="hold-exit" id="t-exit" aria-label="Hold for two seconds to exit">
+      <svg viewBox="0 0 54 54"><circle cx="27" cy="27" r="24" /></svg>✕
+    </button>
+    <div class="hold-hint" id="t-hint" hidden>Hold to exit</div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/notes.js"></script>
+  <script src="js/lanes.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/songs.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/gestures.js"></script>
+  <script src="js/wake-lock.js"></script>
+  <script src="js/play.js"></script>
+</body>
+</html>

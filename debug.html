@@ -1,90 +1,73 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-page-title="Debug">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
   <title>Swing Time — Debug</title>
-  <meta name="theme-color" content="#101418" />
+  <meta name="theme-color" content="#0b0e13" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Swing Time" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="icons/icon-180.png" />
   <link rel="icon" href="icons/icon-192.png" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header class="app-header">
-    <h1>Debug / Calibration</h1>
-    <nav class="header-links">
-      <a class="nav-link" href="index.html">Play</a>
-      <a class="nav-link" href="score.html">Scores</a>
-      <a class="nav-link" href="help.html">Help</a>
-    </nav>
-  </header>
-
-  <main>
-    <section class="panel">
-      <button id="enable-motion" class="primary-button" type="button">Enable Motion</button>
-      <p id="status-line" class="status-line">Tap Enable Motion to see live readings.</p>
-    </section>
+  <main class="page">
+    <header class="page-header">
+      <h1>Debug</h1>
+      <nav>
+        <a class="small-link" id="back-link" href="play.html">Back to playing</a>
+        <a class="small-link" href="index.html">Home</a>
+      </nav>
+    </header>
 
     <section class="panel">
-      <p class="section-title">Live sensor readout</p>
-      <div class="readout-grid">
-        <div class="readout-item">
-          <span class="label">Accel X</span>
-          <span class="value" id="readout-x">0.00</span>
+      <p class="section-title">Role</p>
+      <p id="role-line"></p>
+      <div class="controls" style="margin-top:0">
+        <div class="seg" id="hand-seg" role="group" aria-label="Hand">
+          <button type="button" data-hand="right"><span>Right hand</span></button>
+          <button type="button" data-hand="left"><span>Left hand</span></button>
         </div>
-        <div class="readout-item">
-          <span class="label">Accel Y</span>
-          <span class="value" id="readout-y">0.00</span>
-        </div>
-        <div class="readout-item">
-          <span class="label">Accel Z</span>
-          <span class="value" id="readout-z">0.00</span>
-        </div>
-        <div class="readout-item">
-          <span class="label">Magnitude</span>
-          <span class="value" id="readout-magnitude">0.00</span>
-        </div>
-        <div class="readout-item">
-          <span class="label">Gyro γ (deg/s)</span>
-          <span class="value" id="readout-gamma">0.00</span>
-        </div>
+        <label class="check"><input type="checkbox" id="toddler-test" /> Test Toddler trigger</label>
       </div>
     </section>
 
     <section class="panel">
-      <p class="section-title">Sensitivity thresholds</p>
-
-      <div class="slider-row">
-        <label class="slider-label" for="slider-trigger">
-          <span>Swing trigger threshold</span>
-          <span class="value">—</span>
-        </label>
-        <input type="range" id="slider-trigger" />
+      <button type="button" class="btn btn-primary btn-big" id="motion-btn" style="width:100%">Enable Motion</button>
+      <p id="status" class="small-link">Tap Enable Motion, then swing.</p>
+      <div class="readout">
+        <div><small>x</small><b id="r-x">–</b></div>
+        <div><small>y</small><b id="r-y">–</b></div>
+        <div><small>z</small><b id="r-z">–</b></div>
+        <div><small>|accel| m/s²</small><b id="r-mag">–</b></div>
+        <div><small>rotation °/s</small><b id="r-rot">–</b></div>
+        <div><small>peak |accel|</small><b id="r-peak">–</b></div>
       </div>
-
-      <div class="slider-row">
-        <label class="slider-label" for="slider-refractory">
-          <span>Refractory period</span>
-          <span class="value">—</span>
-        </label>
-        <input type="range" id="slider-refractory" />
-      </div>
-
-      <button id="reset-settings" class="reset-button" type="button">Reset to defaults</button>
     </section>
 
     <section class="panel">
-      <p class="section-title">Detected gestures</p>
-      <ul class="gesture-log" id="gesture-log"></ul>
+      <p class="section-title">Thresholds (saved on this phone)</p>
+      <div id="sliders"></div>
+      <button type="button" class="btn" id="reset-btn">Reset to defaults</button>
+    </section>
+
+    <section class="panel">
+      <p class="section-title">Detected</p>
+      <ul class="log" id="log"></ul>
     </section>
   </main>
 
+  <script src="js/config.js"></script>
   <script src="js/notes.js"></script>
+  <script src="js/lanes.js"></script>
   <script src="js/settings.js"></script>
-  <script src="js/gesture-detector.js"></script>
+  <script src="js/songs.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/gestures.js"></script>
   <script src="js/debug.js"></script>
 </body>
 </html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-page-title="Demo">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <title>Swing Time — Demo</title>
+  <meta name="theme-color" content="#0b0e13" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Swing Time" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main class="demo" id="demo">
+    <header class="demo-top">
+      <div>
+        <h1 id="demo-title">Demo</h1>
+        <div class="subtitle" id="demo-sub">Ring when a block reaches the white line</div>
+      </div>
+      <a class="small-link" href="index.html">Home</a>
+    </header>
+
+    <div class="score-wrap" id="score-wrap">
+      <canvas id="score-canvas"></canvas>
+      <div class="tap-hint" id="tap-hint">🔊 Tap for sound</div>
+    </div>
+
+    <div class="demo-controls">
+      <button type="button" class="btn" id="pause-btn">Pause</button>
+      <button type="button" class="btn" id="restart-btn">Restart</button>
+    </div>
+    <div class="demo-controls">
+      <a class="btn btn-primary btn-big" id="try-btn" href="play.html" hidden>Try it yourself</a>
+      <a class="btn btn-big" id="toddler-btn" href="play.html?mode=toddler" hidden>Toddler</a>
+    </div>
+    <p class="warn" id="demo-error" hidden></p>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/notes.js"></script>
+  <script src="js/lanes.js"></script>
+  <script src="js/songs.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/lane-view.js"></script>
+  <script src="js/wake-lock.js"></script>
+  <script src="js/demo.js"></script>
+</body>
+</html>

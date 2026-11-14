@@ -1,15 +1,59 @@
 {
-  "title": "Au Clair de la Lune (opening phrase)",
-  "bpm": 100,
+  "title": "Au Clair de la Lune",
+  "bpm": 96,
   "beatsPerMeasure": 4,
-  "notes": [
-    {"note": "Do", "beat": 0},
-    {"note": "Do", "beat": 1},
-    {"note": "Do", "beat": 2},
-    {"note": "Do", "beat": 3},
-    {"note": "Re", "beat": 4},
-    {"note": "Mi", "beat": 5},
-    {"note": "Re", "beat": 6},
-    {"note": "Do", "beat": 7}
+
+  "_parts": "Form A A B A. The tune sits in the upper octave (high Do) so the B phrase can dip down to La, Ti and Sol. 'verse' is just A A, for the one-phone version.",
+  "parts": {
+    "melody":
+      "Do2 Do2 Do2 Re2 | Mi2 -   Re2 -   | Do2 Mi2 Re2 Re2 | Do2 -   -   -   | Do2 Do2 Do2 Re2 | Mi2 -   Re2 -   | Do2 Mi2 Re2 Re2 | Do2 -   -   -   | Re2 Re2 Re2 Re2 | La  -   La  -   | Re2 Do2 Ti  La  | Sol -   -   -   | Do2 Do2 Do2 Re2 | Mi2 -   Re2 -   | Do2 Mi2 Re2 Re2 | Do2 -   -   -",
+    "verse":
+      "Do2 Do2 Do2 Re2 | Mi2 -   Re2 -   | Do2 Mi2 Re2 Re2 | Do2 -   -   -   | Do2 Do2 Do2 Re2 | Mi2 -   Re2 -   | Do2 Mi2 Re2 Re2 | Do2 -   -   -",
+    "bassLite":
+      "Do  -   -   -   | Do  -   Sol -   | Do  -   Sol -   | Do  -   -   -   | Do  -   -   -   | Do  -   Sol -   | Do  -   Sol -   | Do  -   -   -   | Sol -   -   -   | -   -   -   -   | Sol -   -   -   | -   -   -   -   | Do  -   -   -   | Do  -   Sol -   | Do  -   Sol -   | Do  -   -   -",
+    "bass":
+      "Do  -   -   -   | Do  -   Sol -   | Do  -   Sol -   | Do  -   -   -   | Do  -   -   -   | Do  -   Sol -   | Do  -   Sol -   | Do  -   -   -   | Sol -   -   -   | Fa  -   -   -   | Sol -   -   -   | -   -   -   -   | Do  -   -   -   | Do  -   Sol -   | Do  -   Sol -   | Do  -   -   -",
+    "inner":
+      "Mi  -   -   -   | Mi  -   Ti  -   | Mi  -   Ti  -   | Mi  -   -   -   | Mi  -   -   -   | Mi  -   Ti  -   | Mi  -   Ti  -   | Mi  -   -   -   | Ti  -   -   -   | Re  -   -   -   | Ti  -   -   -   | -   -   -   -   | Mi  -   -   -   | Mi  -   Ti  -   | Mi  -   Ti  -   | Mi  -   -   -"
+  },
+
+  "arrangements": {
+    "1": {
+      "parts": ["verse"],
+      "layout": {
+        "A": { "forward": "Do2", "back": "Re2", "left": "Mi2", "right": "Sol2" }
+      }
+    },
+    "2": {
+      "parts": ["melody", "bassLite"],
+      "layout": {
+        "A": { "forward": "Do2", "back": "Sol", "left": "Mi2", "right": "La" },
+        "B": { "forward": "Re2", "back": "Do", "left": "Ti", "right": "Mi" }
+      }
+    },
+    "3": {
+      "parts": ["melody", "bass"],
+      "layout": {
+        "A": { "forward": "Do2", "back": "Mi2", "left": "La", "right": "Sol2" },
+        "B": { "forward": "Re2", "back": "Ti", "left": "Mi", "right": "Do3" },
+        "C": { "forward": "Do", "back": "Sol", "left": "Fa", "right": "Do3" }
+      }
+    },
+    "4": {
+      "parts": ["melody", "bass", "inner"],
+      "layout": {
+        "A": { "forward": "Do2", "back": "Mi2", "left": "La", "right": "Sol2" },
+        "B": { "forward": "Re2", "back": "Sol2", "left": "Do3", "right": "La2" },
+        "C": { "forward": "Do", "back": "Sol", "left": "Fa", "right": "Do3" },
+        "D": { "forward": "Mi", "back": "Ti", "left": "Re", "right": "Sol2" }
+      }
+    }
+  },
+
+  "melody": [
+    "Do2", "Do2", "Do2", "Re2", "Mi2", "Re2", "Do2", "Mi2", "Re2", "Re2", "Do2",
+    "Do2", "Do2", "Do2", "Re2", "Mi2", "Re2", "Do2", "Mi2", "Re2", "Re2", "Do2",
+    "Re2", "Re2", "Re2", "Re2", "La", "La", "Re2", "Do2", "Ti", "La", "Sol",
+    "Do2", "Do2", "Do2", "Re2", "Mi2", "Re2", "Do2", "Mi2", "Re2", "Re2", "Do2"
   ]
 }

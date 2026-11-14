@@ -1,32 +1,45 @@
-// Diatonic scale (C major) split into two tetrachords, each mapped to the
-// same four gesture classes.
-const GESTURE_ORDER = ['down', 'up', 'left', 'right'];
+// Two octaves of C major plus the top C (no sharps or flats in V1).
+// "Do" is C4; a trailing 2 or 3 means one or two octaves higher.
+const NOTE_NAMES = [
+  'Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Ti',
+  'Do2', 'Re2', 'Mi2', 'Fa2', 'Sol2', 'La2', 'Ti2',
+  'Do3',
+];
 
-const TETRACHORDS = {
-  lower: {
-    label: 'Lower',
-    notes: [
-      { name: 'Do', freq: 261.63 }, // C4
-      { name: 'Re', freq: 293.66 }, // D4
-      { name: 'Mi', freq: 329.63 }, // E4
-      { name: 'Fa', freq: 349.23 }, // F4
-    ],
-  },
-  upper: {
-    label: 'Upper',
-    notes: [
-      { name: 'Sol', freq: 392.0 }, // G4
-      { name: 'La', freq: 440.0 }, // A4
-      { name: 'Ti', freq: 493.88 }, // B4
-      { name: 'Do', freq: 523.25 }, // C5
-    ],
-  },
-};
+const MAJOR_SCALE_SEMITONES = [0, 2, 4, 5, 7, 9, 11];
+const DO_FREQ = 261.6256; // C4
 
-function noteForGesture(tetrachordKey, gesture) {
-  const index = GESTURE_ORDER.indexOf(gesture);
-  if (index === -1) return null;
-  const tetrachord = TETRACHORDS[tetrachordKey];
-  if (!tetrachord) return null;
-  return tetrachord.notes[index];
+const NOTES = {};
+NOTE_NAMES.forEach((name, i) => {
+  const octave = Math.floor(i / 7);
+  const semis = octave * 12 + MAJOR_SCALE_SEMITONES[i % 7];
+  NOTES[name] = {
+    name,
+    index: i,
+    base: name.replace(/\d$/, ''),
+    octave: octave + 1, // 1, 2 or 3
+    freq: DO_FREQ * Math.pow(2, semis / 12),
+  };
+});
+
+function isNoteName(name) {
+  return Object.prototype.hasOwnProperty.call(NOTES, name);
 }
+
+// Friendly label: base syllable plus "high"/"top" for the upper octaves.
+function noteLabel(name) {
+  const n = NOTES[name];
+  if (!n) return { base: name, octaveWord: '' };
+  return { base: n.base, octaveWord: n.octave === 2 ? 'high' : n.octave === 3 ? 'top' : '' };
+}
+
+// Gestures in display order. Forward and back are the most reliable swings,
+// so layouts put each phone's most-used notes there.
+const GESTURES = ['forward', 'back', 'left', 'right'];
+
+const GESTURE_INFO = {
+  forward: { label: 'Swing forward', short: 'Forward', arrow: '↑' },
+  back: { label: 'Swing back', short: 'Back', arrow: '↓' },
+  left: { label: 'Snap left', short: 'Left', arrow: '←' },
+  right: { label: 'Snap right', short: 'Right', arrow: '→' },
+};

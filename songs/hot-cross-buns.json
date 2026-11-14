@@ -2,12 +2,47 @@
   "title": "Hot Cross Buns",
   "bpm": 90,
   "beatsPerMeasure": 4,
-  "notes": [
-    {"note": "Mi", "beat": 0},
-    {"note": "Re", "beat": 1},
-    {"note": "Do", "beat": 2},
-    {"note": "Mi", "beat": 4},
-    {"note": "Re", "beat": 5},
-    {"note": "Do", "beat": 6}
-  ]
+
+  "_parts": "Each part is a beat grid: one token per beat, '-' for a rest, '|' between bars (ignored). The 'one a penny' bars are stretched from eighths to quarters so nobody has to swing twice a beat.",
+  "parts": {
+    "melody":  "Mi  Re  Do  -   | Mi  Re  Do  -   | Do  Do  Do  Do  | Re  Re  Re  Re  | Mi  Re  Do  -",
+    "harmony": "Sol -   -   -   | Sol -   -   -   | Sol -   Sol -   | Ti  -   Ti  -   | Sol -   Sol -",
+    "sparkle": "-   -   Do2 -   | -   -   Do2 -   | Do2 -   -   -   | Re2 -   -   -   | -   -   Do2 -"
+  },
+
+  "_arrangements": "Keyed by number of phones. 'parts' lists which parts are played; each note is rung by whichever phone(s) hold it in 'layout'. Spare gestures hold chord tones (Do/Mi/Sol octaves) so a stray swing still sounds right.",
+  "arrangements": {
+    "1": {
+      "parts": ["melody"],
+      "layout": {
+        "A": { "forward": "Do", "back": "Re", "left": "Mi", "right": "Sol" }
+      }
+    },
+    "2": {
+      "parts": ["melody", "harmony"],
+      "layout": {
+        "A": { "forward": "Do", "back": "Mi", "left": "Ti", "right": "Do2" },
+        "B": { "forward": "Re", "back": "Sol", "left": "Sol2", "right": "Mi2" }
+      }
+    },
+    "3": {
+      "parts": ["melody", "harmony", "sparkle"],
+      "layout": {
+        "A": { "forward": "Do", "back": "Ti", "left": "Mi2", "right": "Sol2" },
+        "B": { "forward": "Re", "back": "Sol", "left": "Mi2", "right": "Do3" },
+        "C": { "forward": "Do2", "back": "Mi", "left": "Re2", "right": "Sol2" }
+      }
+    },
+    "4": {
+      "parts": ["melody", "harmony", "sparkle"],
+      "layout": {
+        "A": { "forward": "Do", "back": "Sol2", "left": "Mi2", "right": "Do3" },
+        "B": { "forward": "Re", "back": "Sol2", "left": "Mi2", "right": "Do3" },
+        "C": { "forward": "Do2", "back": "Mi", "left": "Re2", "right": "Sol2" },
+        "D": { "forward": "Sol", "back": "Ti", "left": "Mi2", "right": "Do3" }
+      }
+    }
+  },
+
+  "melody": ["Mi", "Re", "Do", "Mi", "Re", "Do", "Do", "Do", "Do", "Do", "Re", "Re", "Re", "Re", "Mi", "Re", "Do"]
 }

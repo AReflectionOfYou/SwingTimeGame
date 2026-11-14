@@ -1,154 +1,160 @@
+// Debug view: live sensor readout, a log of detected swings with the note
+// each one rings, and sliders for every threshold. Takes the same address
+// values as play.html, so the "Debug" link on a player screen keeps its role.
 (function () {
+  const $ = (id) => document.getElementById(id);
+  const bell = new BellSynth();
   const settings = loadSettings();
-  const gestureLog = [];
-  const MAX_LOG_ENTRIES = 20;
+  let hand = loadHand();
+  let slots = null; // this role's notes
+  let toddlerTest = false;
+  let peak = 0;
+  let peakTime = 0;
+  const log = [];
 
-  const enableButton = document.getElementById('enable-motion');
-  const statusLine = document.getElementById('status-line');
-  const readouts = {
-    x: document.getElementById('readout-x'),
-    y: document.getElementById('readout-y'),
-    z: document.getElementById('readout-z'),
-    magnitude: document.getElementById('readout-magnitude'),
-    gamma: document.getElementById('readout-gamma'),
-  };
-  const logList = document.getElementById('gesture-log');
-  const resetButton = document.getElementById('reset-settings');
+  const fmt = (n) => (Math.abs(n) < 10 ? n.toFixed(2) : n.toFixed(1));
 
-  const sliderConfigs = [
-    { key: 'triggerThreshold', id: 'slider-trigger', suffix: ' m/s²' },
-    { key: 'refractoryMs', id: 'slider-refractory', suffix: ' ms' },
-  ];
-
-  function formatNum(n) {
-    return n.toFixed(2);
-  }
-
-  // devicemotion fires far faster than a human can read; only repaint the
-  // live readout a few times a second so the numbers are legible.
-  const READOUT_INTERVAL_MS = 200;
-  let lastReadoutRender = 0;
-
-  function renderReadout(sample) {
-    const now = performance.now();
-    if (now - lastReadoutRender < READOUT_INTERVAL_MS) return;
-    lastReadoutRender = now;
-    readouts.x.textContent = formatNum(sample.x);
-    readouts.y.textContent = formatNum(sample.y);
-    readouts.z.textContent = formatNum(sample.z);
-    readouts.magnitude.textContent = formatNum(sample.magnitude);
-    readouts.gamma.textContent = formatNum(sample.gammaRate);
-  }
-
-  function renderLog() {
-    logList.innerHTML = '';
-    gestureLog.forEach((entry) => {
-      const li = document.createElement('li');
-      const ageSec = ((performance.now() - entry.time) / 1000).toFixed(2);
-      li.innerHTML =
-        '<span class="gesture-name">' +
-        entry.gesture +
-        '</span><span class="gesture-values">x:' +
-        formatNum(entry.x) +
-        ' y:' +
-        formatNum(entry.y) +
-        ' z:' +
-        formatNum(entry.z) +
-        '</span><span class="ago">' +
-        ageSec +
-        's ago</span>';
-      logList.appendChild(li);
-    });
-  }
-
-  function handleGesture(gesture, sample) {
-    gestureLog.push({ gesture, time: performance.now(), x: sample.x, y: sample.y, z: sample.z });
-    if (gestureLog.length > MAX_LOG_ENTRIES) gestureLog.shift();
+  function addLog(label, s, note) {
+    log.unshift({ label, note, s, time: performance.now() });
+    if (log.length > 25) log.pop();
     renderLog();
   }
 
+  function renderLog() {
+    const now = performance.now();
+    $('log').innerHTML = log
+      .map(
+        (e) =>
+          '<li><span class="g">' + e.label + (e.note ? ' → ' + e.note : '') + '</span>' +
+          '<span class="v">x ' + fmt(e.s.x) + ' · z ' + fmt(e.s.z) + ' · |a| ' + fmt(e.s.magnitude) +
+          ' · rot ' + Math.round(e.s.rotation) + '</span>' +
+          '<span class="v">' + ((now - e.time) / 1000).toFixed(1) + 's</span></li>'
+      )
+      .join('');
+  }
+  setInterval(renderLog, 500);
+
   const detector = new GestureDetector({
     settings,
-    handedness: localStorage.getItem('handbell-handedness') || 'right',
-    onGesture: handleGesture,
-    onSample: renderReadout,
+    hand,
+    onGesture: (g, s) => {
+      const note = slots && slots[g];
+      if (note) bell.ringNote(note);
+      addLog(GESTURE_INFO[g].label, s, note);
+    },
+  });
+  const toddler = new ToddlerTrigger({
+    settings,
+    onTrigger: (s) => {
+      bell.ringNote('Sol');
+      addLog('Toddler wave', s, 'Sol');
+    },
   });
 
-  setInterval(renderLog, 250);
+  // The readout repaints a few times a second so the numbers are legible.
+  let lastPaint = 0;
+  const motion = new MotionSource((s) => {
+    if (toddlerTest) toddler.sample(s);
+    else detector.sample(s);
+    if (s.magnitude > peak || s.time - peakTime > 1500) {
+      peak = s.magnitude;
+      peakTime = s.time;
+    }
+    if (s.time - lastPaint < 200) return;
+    lastPaint = s.time;
+    $('r-x').textContent = fmt(s.x);
+    $('r-y').textContent = fmt(s.y);
+    $('r-z').textContent = fmt(s.z);
+    $('r-mag').textContent = fmt(s.magnitude);
+    $('r-rot').textContent = Math.round(s.rotation);
+    $('r-peak').textContent = fmt(peak);
+  });
 
-  let motionActive = false;
-  let permissionGranted = false;
-
-  async function startMotion() {
-    enableButton.disabled = true;
-    if (!permissionGranted) {
-      statusLine.textContent = 'Requesting permission…';
-      try {
-        const granted = await GestureDetector.requestPermission();
-        if (!granted) {
-          statusLine.textContent = 'Motion permission denied. Reload to try again.';
-          enableButton.disabled = false;
+  let running = false;
+  $('motion-btn').addEventListener('click', () => {
+    if (running) {
+      motion.stop();
+      running = false;
+      $('motion-btn').textContent = 'Enable Motion';
+      $('status').textContent = 'Motion stopped.';
+      return;
+    }
+    bell.unlock();
+    MotionSource.requestPermission()
+      .then((ok) => {
+        if (!ok) {
+          $('status').textContent = 'Motion permission denied. Reload to try again.';
           return;
         }
-        permissionGranted = true;
-      } catch (err) {
-        statusLine.textContent = 'Could not enable motion: ' + err.message;
-        enableButton.disabled = false;
-        return;
-      }
-    }
-    detector.start();
-    motionActive = true;
-    enableButton.textContent = 'Stop Motion';
-    enableButton.disabled = false;
-    statusLine.textContent = 'Motion enabled — live readout below.';
-  }
-
-  function stopMotion() {
-    detector.stop();
-    motionActive = false;
-    enableButton.textContent = 'Enable Motion';
-    statusLine.textContent = 'Motion stopped.';
-  }
-
-  enableButton.addEventListener('click', () => {
-    if (motionActive) {
-      stopMotion();
-    } else {
-      startMotion();
-    }
+        motion.start();
+        running = true;
+        $('motion-btn').textContent = 'Stop Motion';
+        $('status').textContent = 'Motion on — live readout below.';
+      })
+      .catch((err) => ($('status').textContent = 'Could not enable motion: ' + err.message));
   });
 
-  function bindSlider({ key, id, suffix }) {
-    const input = document.getElementById(id);
-    const valueLabel = document.querySelector('label[for="' + id + '"] .value');
-    const limits = SETTINGS_LIMITS[key];
-    input.min = limits.min;
-    input.max = limits.max;
-    input.step = limits.step;
-    input.value = settings[key];
-    valueLabel.textContent = settings[key] + suffix;
+  // Hand
+  function renderHand() {
+    document.querySelectorAll('#hand-seg button').forEach((b) => b.classList.toggle('active', b.dataset.hand === hand));
+  }
+  document.querySelectorAll('#hand-seg button').forEach((b) =>
+    b.addEventListener('click', () => {
+      hand = b.dataset.hand;
+      saveHand(hand);
+      detector.hand = hand;
+      renderHand();
+    })
+  );
+  renderHand();
 
-    input.addEventListener('input', () => {
-      const val = parseFloat(input.value);
-      settings[key] = val;
-      valueLabel.textContent = val + suffix;
-      detector.updateSettings(settings);
-      saveSettings(settings);
+  $('toddler-test').addEventListener('change', (e) => (toddlerTest = e.target.checked));
+
+  // Sliders
+  function buildSliders() {
+    const box = $('sliders');
+    box.innerHTML = '';
+    Object.keys(SETTINGS_LIMITS).forEach((key) => {
+      const lim = SETTINGS_LIMITS[key];
+      const row = document.createElement('div');
+      row.className = 'slider-row';
+      row.innerHTML =
+        '<label for="s-' + key + '"><span>' + lim.label + '</span><span class="val"></span></label>' +
+        '<input type="range" id="s-' + key + '" min="' + lim.min + '" max="' + lim.max + '" step="' + lim.step + '" />';
+      const input = row.querySelector('input');
+      const val = row.querySelector('.val');
+      input.value = settings[key];
+      val.textContent = settings[key] + lim.unit;
+      input.addEventListener('input', () => {
+        settings[key] = Number(input.value);
+        val.textContent = settings[key] + lim.unit;
+        saveSettings(settings);
+      });
+      box.appendChild(row);
     });
   }
+  buildSliders();
 
-  sliderConfigs.forEach(bindSlider);
-
-  resetButton.addEventListener('click', () => {
+  $('reset-btn').addEventListener('click', () => {
     Object.assign(settings, SETTINGS_DEFAULTS);
     saveSettings(settings);
-    detector.updateSettings(settings);
-    sliderConfigs.forEach(({ key, id, suffix }) => {
-      const input = document.getElementById(id);
-      const valueLabel = document.querySelector('label[for="' + id + '"] .value');
-      input.value = settings[key];
-      valueLabel.textContent = settings[key] + suffix;
-    });
+    buildSliders();
   });
+
+  // Role, from the same address values as play.html.
+  const p = new URLSearchParams(location.search);
+  $('back-link').href = 'play.html' + location.search;
+  const size = Number(p.get('size')) || 2;
+  const lane = laneByNumber(p.get('player')) || LANES[0];
+  Promise.all([p.get('song') ? loadSong(p.get('song')).catch(() => null) : null, loadDefaultLayouts()]).then(
+    ([song, defaults]) => {
+      const src = song || { title: 'Default', arrangements: { [size]: { layout: 'default', parts: [] } } };
+      const arr = resolveArrangement(src, size, defaults) ||
+        resolveArrangement({ title: 'Default', arrangements: { [size]: { layout: 'default' } } }, size, defaults);
+      slots = arr && arr.layout[lane.letter];
+      const notes = slots ? GESTURES.map((g) => GESTURE_INFO[g].short + ' ' + slots[g]).join(' · ') : 'none';
+      $('role-line').textContent =
+        'Player ' + lane.number + ' (' + lane.name + ') of ' + size + ', ' + (song ? song.title : 'default layout') + ': ' + notes;
+    }
+  );
 })();
