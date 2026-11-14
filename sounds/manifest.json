@@ -1,0 +1,72 @@
+{
+  "_about": "Which sound file each note plays. rate 0.5 = played at half speed, one octave down (\"shifted\": the pack has no recording at that pitch). Made by tools/prepare-sounds.py.",
+  "notes": {
+    "Do": {
+      "file": "c6.m4a",
+      "rate": 0.5,
+      "shifted": true
+    },
+    "Re": {
+      "file": "d6.m4a",
+      "rate": 0.5,
+      "shifted": true
+    },
+    "Mi": {
+      "file": "e6.m4a",
+      "rate": 0.5,
+      "shifted": true
+    },
+    "Fa": {
+      "file": "f6.m4a",
+      "rate": 0.5,
+      "shifted": true
+    },
+    "Sol": {
+      "file": "g6.m4a",
+      "rate": 0.5,
+      "shifted": true
+    },
+    "La": {
+      "file": "a6.m4a",
+      "rate": 0.5,
+      "shifted": true
+    },
+    "Ti": {
+      "file": "b6.m4a",
+      "rate": 0.5,
+      "shifted": true
+    },
+    "Do2": {
+      "file": "c6.m4a",
+      "rate": 1
+    },
+    "Re2": {
+      "file": "d6.m4a",
+      "rate": 1
+    },
+    "Mi2": {
+      "file": "e6.m4a",
+      "rate": 1
+    },
+    "Fa2": {
+      "file": "f6.m4a",
+      "rate": 1
+    },
+    "Sol2": {
+      "file": "g6.m4a",
+      "rate": 1
+    },
+    "La2": {
+      "file": "a6.m4a",
+      "rate": 1
+    },
+    "Ti2": {
+      "file": "b6.m4a",
+      "rate": 1
+    },
+    "Do3": {
+      "file": "c7.m4a",
+      "rate": 1
+    }
+  }
+}

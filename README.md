@@ -40,6 +40,15 @@ computer's network address.
 
 Includes [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator) by Kazuhiko Arase (MIT), in `js/vendor/qrcode.js`.
 
+## Third-party sounds
+
+The bell sounds are the "Hand Bells, Singles" pack by InspectorJ (www.jshaw.co.uk) of
+Freesound.org, under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). They are
+not covered by the license notices below. Sources, links and the changes made are in
+[sounds/CREDITS.md](sounds/CREDITS.md). To rebuild the app's sound files from
+`sounds/source/`, run `python3 tools/prepare-sounds.py` on a Mac, then bump
+`SOUNDS_VERSION` in `js/audio.js`.
+
 ## License
 
 Code is under the [MIT License](LICENSE). Documents, written content, images, audio, and video are under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); see [LICENSE-CONTENT](LICENSE-CONTENT). © 2026 Michael A. Heroux.

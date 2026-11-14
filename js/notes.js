@@ -1,5 +1,6 @@
 // Two octaves of C major plus the top C (no sharps or flats in V1).
-// "Do" is C4; a trailing 2 or 3 means one or two octaves higher.
+// "Do" is C5 (handbell register, matching the recorded samples); a trailing
+// 2 or 3 means one or two octaves higher, up to Do3 = C7.
 const NOTE_NAMES = [
   'Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Ti',
   'Do2', 'Re2', 'Mi2', 'Fa2', 'Sol2', 'La2', 'Ti2',
@@ -7,7 +8,7 @@ const NOTE_NAMES = [
 ];
 
 const MAJOR_SCALE_SEMITONES = [0, 2, 4, 5, 7, 9, 11];
-const DO_FREQ = 261.6256; // C4
+const DO_FREQ = 523.2511; // C5
 
 const NOTES = {};
 NOTE_NAMES.forEach((name, i) => {

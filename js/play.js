@@ -320,7 +320,7 @@
     const ctx = bell.ensureContext();
     const t = ctx.currentTime + 0.45;
     ['Do3', 'Sol2', 'Mi2', 'Do2'].forEach((n, i) => {
-      bell.ring(NOTES[n].freq, { volume: 0.25, when: t + i * 0.09 });
+      bell.ringNote(n, { volume: 0.25, when: t + i * 0.09 });
     });
   }
 

@@ -141,6 +141,31 @@
     buildSliders();
   });
 
+  // Bells: every note, tappable, plus a whole-range scale.
+  const grid = $('bell-grid');
+  NOTE_NAMES.forEach((name) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'btn';
+    b.textContent = name;
+    b.addEventListener('click', () => {
+      bell.unlock();
+      bell.ringNote(name);
+    });
+    grid.appendChild(b);
+  });
+  $('play-all').addEventListener('click', () => {
+    const ctx = bell.unlock();
+    const t = ctx.currentTime + 0.05;
+    NOTE_NAMES.forEach((name, i) => bell.ringNote(name, { when: t + i * 0.45 }));
+  });
+  bell.ready.then(() => {
+    $('bell-status').textContent =
+      bell.status === 'ready'
+        ? 'Recorded handbells loaded. Do–Ti are the recordings played an octave lower.'
+        : 'Recordings did not load — using the synthesized backup bell.';
+  });
+
   // Role, from the same address values as play.html.
   const p = new URLSearchParams(location.search);
   $('back-link').href = 'play.html' + location.search;
