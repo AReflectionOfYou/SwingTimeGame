@@ -12,7 +12,7 @@
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="icons/icon-180.png" />
   <link rel="icon" href="icons/icon-192.png" />
-  <link rel="stylesheet" href="css/style.css?v=2" />
+  <link rel="stylesheet" href="css/style.css?v=3" />
 </head>
 <body>
   <!-- Player: configured from the QR link (?song=…&size=…&player=…) -->
@@ -88,17 +88,21 @@
     <button type="button" class="hold-exit" id="t-exit" aria-label="Hold for two seconds to exit">
       <svg viewBox="0 0 54 54"><circle cx="27" cy="27" r="24" /></svg>✕
     </button>
-    <div class="hold-hint" id="t-hint" hidden>Hold to exit</div>
+    <!-- Shown mid-screen while the exit is held, since the thumb covers the corner button -->
+    <div class="exit-panel" id="t-hint" hidden aria-live="polite">
+      <div class="exit-text" id="t-hint-text">Keep holding to exit</div>
+      <div class="exit-bar"><div class="exit-fill" id="t-hint-fill"></div></div>
+    </div>
   </main>
 
-  <script src="js/config.js?v=2"></script>
-  <script src="js/notes.js?v=2"></script>
-  <script src="js/lanes.js?v=2"></script>
-  <script src="js/settings.js?v=2"></script>
-  <script src="js/songs.js?v=2"></script>
-  <script src="js/audio.js?v=2"></script>
-  <script src="js/gestures.js?v=2"></script>
-  <script src="js/wake-lock.js?v=2"></script>
-  <script src="js/play.js?v=2"></script>
+  <script src="js/config.js?v=3"></script>
+  <script src="js/notes.js?v=3"></script>
+  <script src="js/lanes.js?v=3"></script>
+  <script src="js/settings.js?v=3"></script>
+  <script src="js/songs.js?v=3"></script>
+  <script src="js/audio.js?v=3"></script>
+  <script src="js/gestures.js?v=3"></script>
+  <script src="js/wake-lock.js?v=3"></script>
+  <script src="js/play.js?v=3"></script>
 </body>
 </html>

@@ -347,25 +347,46 @@
   });
   document.addEventListener('gesturestart', (e) => e.preventDefault());
 
-  // Grown-up exit: press and hold the corner control for two seconds.
+  // Grown-up exit: press and hold the corner control for two seconds. The
+  // thumb hides the button itself, so progress shows in a panel mid-screen.
   (function holdToExit() {
+    const HOLD_MS = 2000;
     const btn = $('t-exit');
+    const panel = $('t-hint');
+    const text = $('t-hint-text');
+    const fill = $('t-hint-fill');
     let timer = null;
+    let hideTimer = null;
     const cancel = () => {
+      if (!timer) return;
       clearTimeout(timer);
       timer = null;
       btn.classList.remove('holding');
+      // Let go early: reset the bar and say how to exit, briefly.
+      fill.style.transition = 'none';
+      fill.style.width = '0%';
+      text.textContent = 'Hold for 2 seconds to exit';
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => (panel.hidden = true), 1500);
     };
     btn.addEventListener('pointerdown', (e) => {
       e.preventDefault();
-      btn.classList.add('holding');
-      $('t-hint').hidden = false;
       clearTimeout(timer);
+      clearTimeout(hideTimer);
+      btn.classList.add('holding');
+      text.textContent = 'Keep holding to exit…';
+      panel.hidden = false;
+      fill.style.transition = 'none';
+      fill.style.width = '0%';
+      void fill.offsetWidth; // restart the fill animation
+      fill.style.transition = 'width ' + HOLD_MS + 'ms linear';
+      fill.style.width = '100%';
       timer = setTimeout(() => {
+        timer = null;
+        text.textContent = 'Bye!';
         disableMotion();
         location.href = 'index.html';
-      }, 2000);
-      setTimeout(() => ($('t-hint').hidden = true), 2500);
+      }, HOLD_MS);
     });
     ['pointerup', 'pointercancel', 'pointerleave'].forEach((ev) => btn.addEventListener(ev, cancel));
     btn.addEventListener('contextmenu', (e) => e.preventDefault());
