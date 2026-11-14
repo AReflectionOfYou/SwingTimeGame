@@ -19,7 +19,11 @@ Play it at <https://areflectionofyou.github.io/SwingTimeGame/>.
 ## Editing
 
 - App name and QR base address: `js/config.js` (the name also appears in `manifest.json`)
-- Songs: `songs/*.json`, listed in order in `songs/index.json` (the first is the Demo song)
+- Songs: `songs/*.json`, listed in order in `songs/index.json` (the first is the Demo song).
+  A part is a string of notes, one beat each by default; `Sol/0.75` gives a note its own
+  length in beats, `-` is a rest and `|` a bar line. An arrangement's `"alternate": ["Mi"]`
+  makes phones that share a note take turns instead of ringing together. The format is
+  described at the top of `js/songs.js`.
 - Default note layouts for 1–4 phones: `data/default-layouts.json`
 - After changing any file in `css/` or `js/`, bump the `?v=` number on its links in every `.html` page
   (for example `?v=2` → `?v=3`) so browsers fetch the new copy instead of a cached one.

@@ -36,6 +36,15 @@ class LaneView {
     this.arrangement = arrangement;
     this.beatsPerMeasure = beatsPerMeasure || 4;
     this.lanes = arrangement.phones.map((p) => laneByLetter(p));
+    // Each block is up to 0.86 beat wide, but never runs into the next block
+    // in its own lane (short notes in quick songs).
+    this.widths = new Map();
+    const lastInLane = {};
+    arrangement.cues.forEach((c) => {
+      const prev = lastInLane[c.phone];
+      if (prev) this.widths.set(prev, Math.min(0.86, (c.beat - prev.beat) * 0.88));
+      lastInLane[c.phone] = c;
+    });
     this.draw();
   }
 
@@ -122,8 +131,8 @@ class LaneView {
     });
 
     // Blocks.
-    const blockW = Math.max(10, pxPerBeat * 0.86);
     this.arrangement.cues.forEach((c) => {
+      const blockW = Math.max(10, pxPerBeat * (this.widths.has(c) ? this.widths.get(c) : 0.86));
       const x = xOf(c.beat);
       if (x + blockW < 0 || x > W) return;
       const laneIdx = this.arrangement.phones.indexOf(c.phone);

@@ -1,0 +1,46 @@
+{
+  "title": "Joy to the World",
+  "bpm": 66,
+  "beatsPerMeasure": 2,
+  "_about": "PROPOSED for owner review. Tune ANTIOCH, checked note for note against a hymnal score (MIDI from the Cyber Hymnal / CCEL), transposed from D to C. Melody only, one octave from Do up to high Do. One beat = a quarter note (2/4 time).",
+  "parts": {
+    "melody":
+      "Do2/1 Ti/0.75 La/0.25 | Sol/1.5 Fa/0.5 | Mi/1 Re/1 | Do/1.5 Sol/0.5 | La/1.5 La/0.5 | Ti/1.5 Ti/0.5 | Do2/1.5 Do2/0.5 | Do2/0.5 Ti/0.5 La/0.5 Sol/0.5 | Sol/0.75 Fa/0.25 Mi/0.5 Do2/0.5 | Do2/0.5 Ti/0.5 La/0.5 Sol/0.5 | Sol/0.75 Fa/0.25 Mi/0.5 Mi/0.5 | Mi/0.5 Mi/0.5 Mi/0.5 Mi/0.25 Fa/0.25 | Sol/1.5 Fa/0.25 Mi/0.25 | Re/0.5 Re/0.5 Re/0.5 Re/0.25 Mi/0.25 | Fa/1.5 Mi/0.25 Re/0.25 | Do/0.5 Do2/1 La/0.5 | Sol/0.75 Fa/0.25 Mi/0.5 Fa/0.5 | Mi/1 Re/1 | Do/2"
+  },
+  "_arrangements": "The opening scale passes down through every phone, one step each. 2 phones: each phone holds every other step (A: Do2 La Fa Re, B: Ti Sol Mi Do); no room for doubling, so the fast repeated Mi and Re runs stay on one phone. 3 and 4 phones double the notes with fast repeats (Do2, Sol, Mi, Re) and the two holders take turns.",
+  "arrangements": {
+    "2": {
+      "parts": ["melody"],
+      "layout": {
+        "A": {"forward": "Fa", "back": "Do2", "left": "Re", "right": "La"},
+        "B": {"forward": "Mi", "back": "Sol", "left": "Ti", "right": "Do"}
+      }
+    },
+    "3": {
+      "parts": ["melody"],
+      "alternate": ["Do2", "Sol", "Mi", "Re"],
+      "layout": {
+        "A": {"forward": "Mi", "back": "Sol", "left": "Do2", "right": "Re"},
+        "B": {"forward": "Fa", "back": "Ti", "left": "Do", "right": "Do2"},
+        "C": {"forward": "Mi", "back": "La", "left": "Re", "right": "Sol"}
+      }
+    },
+    "4": {
+      "parts": ["melody"],
+      "alternate": ["Do2", "Sol", "Mi", "Re"],
+      "layout": {
+        "A": {"forward": "Fa", "back": "Do2", "left": "Re", "right": "Sol2"},
+        "B": {"forward": "Mi", "back": "Ti", "left": "Sol", "right": "Mi2"},
+        "C": {"forward": "La", "back": "Re", "left": "Do2", "right": "Sol2"},
+        "D": {"forward": "Mi", "back": "Sol", "left": "Do", "right": "Do3"}
+      }
+    }
+  },
+  "melody": [
+    "Do2", "Ti", "La", "Sol", "Fa", "Mi", "Re", "Do", "Sol", "La", "La", "Ti",
+    "Ti", "Do2", "Do2", "Do2", "Ti", "La", "Sol", "Sol", "Fa", "Mi", "Do2", "Do2",
+    "Ti", "La", "Sol", "Sol", "Fa", "Mi", "Mi", "Mi", "Mi", "Mi", "Mi", "Fa",
+    "Sol", "Fa", "Mi", "Re", "Re", "Re", "Re", "Mi", "Fa", "Mi", "Re", "Do",
+    "Do2", "La", "Sol", "Fa", "Mi", "Fa", "Mi", "Re", "Do"
+  ]
+}

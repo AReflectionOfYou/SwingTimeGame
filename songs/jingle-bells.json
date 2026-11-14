@@ -1,0 +1,49 @@
+{
+  "title": "Jingle Bells (chorus)",
+  "bpm": 100,
+  "beatsPerMeasure": 4,
+  "_about": "PROPOSED for owner review. Chorus only, from the 1857 tune as sung today (checked against an ABC transcription). Melody in the upper octave (C6 up to G6, real recordings); bass on the lower octave. One beat = a quarter note.",
+  "parts": {
+    "melody":
+      "Mi2 Mi2 Mi2/2 | Mi2 Mi2 Mi2/2 | Mi2 Sol2 Do2/1.5 Re2/0.5 | Mi2/4 | Fa2 Fa2 Fa2/1.5 Fa2/0.5 | Fa2 Mi2 Mi2 Mi2/0.5 Mi2/0.5 | Mi2 Re2 Re2 Mi2 | Re2/2 Sol2/2 | Mi2 Mi2 Mi2/2 | Mi2 Mi2 Mi2/2 | Mi2 Sol2 Do2/1.5 Re2/0.5 | Mi2/4 | Fa2 Fa2 Fa2/1.5 Fa2/0.5 | Fa2 Mi2 Mi2 Mi2/0.5 Mi2/0.5 | Sol2 Sol2 Fa2 Re2 | Do2/4",
+    "bass":
+      "Do/4 | Do/4 | Do/4 | Do/4 | Fa/4 | Do/4 | Re/4 | Sol/4 | Do/4 | Do/4 | Do/4 | Do/4 | Fa/4 | Do/4 | Sol/4 | Do/4"
+  },
+  "_arrangements": "Mi2 and Fa2 sit on two phones and take turns ('alternate'), so the runs of repeated notes, including the eighth notes, are shared between two players. 2 phones: melody only. 3 and 4 phones add a bass note on the first beat of each bar (C, F, D, G chords), all on one phone.",
+  "arrangements": {
+    "2": {
+      "parts": ["melody"],
+      "alternate": ["Mi2", "Fa2"],
+      "layout": {
+        "A": {"forward": "Mi2", "back": "Sol2", "left": "Fa2", "right": "Do2"},
+        "B": {"forward": "Mi2", "back": "Fa2", "left": "Re2", "right": "Sol"}
+      }
+    },
+    "3": {
+      "parts": ["melody", "bass"],
+      "alternate": ["Mi2", "Fa2"],
+      "layout": {
+        "A": {"forward": "Mi2", "back": "Sol2", "left": "Fa2", "right": "Do2"},
+        "B": {"forward": "Mi2", "back": "Fa2", "left": "Re2", "right": "Do3"},
+        "C": {"forward": "Do", "back": "Sol", "left": "Fa", "right": "Re"}
+      }
+    },
+    "4": {
+      "parts": ["melody", "bass"],
+      "alternate": ["Mi2", "Fa2"],
+      "layout": {
+        "A": {"forward": "Mi2", "back": "Sol2", "left": "Mi", "right": "Do3"},
+        "B": {"forward": "Mi2", "back": "Fa2", "left": "Mi", "right": "Do3"},
+        "C": {"forward": "Fa2", "back": "Re2", "left": "Do2", "right": "Do3"},
+        "D": {"forward": "Do", "back": "Sol", "left": "Fa", "right": "Re"}
+      }
+    }
+  },
+  "melody": [
+    "Mi2", "Mi2", "Mi2", "Mi2", "Mi2", "Mi2", "Mi2", "Sol2", "Do2", "Re2", "Mi2", "Fa2",
+    "Fa2", "Fa2", "Fa2", "Fa2", "Mi2", "Mi2", "Mi2", "Mi2", "Mi2", "Re2", "Re2", "Mi2",
+    "Re2", "Sol2", "Mi2", "Mi2", "Mi2", "Mi2", "Mi2", "Mi2", "Mi2", "Sol2", "Do2", "Re2",
+    "Mi2", "Fa2", "Fa2", "Fa2", "Fa2", "Fa2", "Mi2", "Mi2", "Mi2", "Mi2", "Sol2", "Sol2",
+    "Fa2", "Re2", "Do2"
+  ]
+}

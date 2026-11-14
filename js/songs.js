@@ -7,11 +7,13 @@
 //   parts:        { name: beat-grid string | [{ note, beat }] }
 //   arrangements: { "1".."4": { layout: {A:{forward,back,left,right},…} | "default",
 //                               parts: [part names],
+//                               alternate: [note names] (optional),
 //                               notes: [{ phone, gesture, beat }] (optional, explicit) } }
 //   melody:       [note names] — optional; enables Toddler mode
 //
 // A part note is rung by every phone whose layout holds that note (so a note
-// placed on two phones is deliberately doubled).
+// placed on two phones is deliberately doubled), unless the note is listed in
+// "alternate", in which case its holders take turns.
 
 const SONG_SIZES = ['1', '2', '3', '4'];
 
@@ -51,7 +53,11 @@ function loadAllSongs() {
   return loadSongIndex().then((ids) => Promise.all(ids.map(loadSong)));
 }
 
-// "Mi Re Do - | Mi …" → [{ note, beat }]
+// Beat grid → [{ note, beat }]. One token per beat by default:
+//   "Mi Re Do - | Mi …"            ('-' is a rest, '|' a bar line, ignored)
+// A token may give its own length in beats after a slash, for dotted and
+// short notes:
+//   "Sol/0.75 La/0.25 Sol/0.5 Mi/1.5 | -/0.5 …"
 function parseGrid(grid) {
   const events = [];
   let beat = 0;
@@ -60,8 +66,9 @@ function parseGrid(grid) {
     .filter(Boolean)
     .forEach((tok) => {
       if (tok === '|') return;
-      if (tok !== '-' && tok !== '.') events.push({ note: tok, beat });
-      beat += 1;
+      const [name, len] = tok.split('/');
+      if (name !== '-' && name !== '.') events.push({ note: name, beat: Math.round(beat * 1000) / 1000 });
+      beat += len === undefined ? 1 : Number(len);
     });
   return events;
 }
@@ -123,20 +130,36 @@ function resolveArrangement(song, size, defaultLayouts) {
     });
   });
 
-  const cues = [];
+  // A note held by two or more phones normally rings on all of them
+  // (doubling). Notes listed in "alternate" instead go to whichever holder
+  // has been idle longest, so a run of fast repeated notes is shared out.
+  const alternate = new Set(arr.alternate || []);
+  const lastCueBeat = {};
+  const events = [];
   (arr.parts || []).forEach((partName) => {
     const part = song.parts && song.parts[partName];
     if (!part) {
       warnings.push(where + ': missing part "' + partName + '"');
       return;
     }
-    partEvents(part).forEach((ev) => {
-      const hs = holders[ev.note];
-      if (!hs) {
-        warnings.push(where + ': ' + ev.note + ' at beat ' + ev.beat + ' (' + partName + ') is not on any phone');
-        return;
-      }
-      hs.forEach((h) => cues.push({ phone: h.phone, gesture: h.gesture, note: ev.note, beat: ev.beat, part: partName }));
+    partEvents(part).forEach((ev) => events.push({ ...ev, part: partName }));
+  });
+  events.sort((a, b) => a.beat - b.beat);
+
+  const cues = [];
+  events.forEach((ev) => {
+    let hs = holders[ev.note];
+    if (!hs) {
+      warnings.push(where + ': ' + ev.note + ' at beat ' + ev.beat + ' (' + ev.part + ') is not on any phone');
+      return;
+    }
+    if (alternate.has(ev.note) && hs.length > 1) {
+      const idle = (h) => (lastCueBeat[h.phone] === undefined ? -Infinity : lastCueBeat[h.phone]);
+      hs = [hs.reduce((best, h) => (idle(h) < idle(best) ? h : best))];
+    }
+    hs.forEach((h) => {
+      cues.push({ phone: h.phone, gesture: h.gesture, note: ev.note, beat: ev.beat, part: ev.part });
+      lastCueBeat[h.phone] = ev.beat;
     });
   });
   (arr.notes || []).forEach((n) => {

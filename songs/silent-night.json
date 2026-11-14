@@ -1,0 +1,38 @@
+{
+  "title": "Silent Night",
+  "bpm": 56,
+  "beatsPerMeasure": 3,
+  "_about": "PROPOSED for owner review. Tune STILLE NACHT (Gruber), checked note for note against the public-domain Mutopia Project score, transposed from B-flat to C. 6/8 time, counted here as 3 quarter-note beats per bar. The melody uses 11 different notes (Do up to high Fa).",
+  "parts": {
+    "melody":
+      "Sol/0.75 La/0.25 Sol/0.5 Mi/1.5 | Sol/0.75 La/0.25 Sol/0.5 Mi/1.5 | Re2/1 Re2/0.5 Ti/1.5 | Do2/1 Do2/0.5 Sol/1.5 | La/1 La/0.5 Do2/0.75 Ti/0.25 La/0.5 | Sol/0.75 La/0.25 Sol/0.5 Mi/1.5 | La/1 La/0.5 Do2/0.75 Ti/0.25 La/0.5 | Sol/0.75 La/0.25 Sol/0.5 Mi/1.5 | Re2/1 Re2/0.5 Fa2/0.75 Re2/0.25 Ti/0.5 | Do2/1.5 Mi2/1.5 | Do2/0.75 Sol/0.25 Mi/0.5 Sol/0.75 Fa/0.25 Re/0.5 | Do/3",
+    "bells":
+      "Do/3 | Do/3 | Sol/3 | Do/3 | Fa/3 | Do/3 | Fa/3 | Do/3 | Sol/3 | Do/3 | Do/3 | -/3"
+  },
+  "_arrangements": "No 2-phone version: the melody needs 11 different notes and two phones hold only 8, so a 2-phone version would have to change the tune. 3 and 4 phones add 'bells': a low chord note (Do, Fa or Sol) on the first beat of each bar. In the 4-phone version phone D rings those, plus the last notes of the song.",
+  "arrangements": {
+    "3": {
+      "parts": ["melody", "bells"],
+      "layout": {
+        "A": {"forward": "Sol", "back": "Ti", "left": "Fa", "right": "Fa2"},
+        "B": {"forward": "La", "back": "Do2", "left": "Re", "right": "Mi2"},
+        "C": {"forward": "Do", "back": "Mi", "left": "Re2", "right": "Sol2"}
+      }
+    },
+    "4": {
+      "parts": ["melody", "bells"],
+      "layout": {
+        "A": {"forward": "Sol", "back": "Ti", "left": "Fa2", "right": "Do3"},
+        "B": {"forward": "La", "back": "Do2", "left": "Re", "right": "Sol2"},
+        "C": {"forward": "Mi", "back": "Re2", "left": "Do3", "right": "Sol2"},
+        "D": {"forward": "Do", "back": "Fa", "left": "Mi2", "right": "Do3"}
+      }
+    }
+  },
+  "melody": [
+    "Sol", "La", "Sol", "Mi", "Sol", "La", "Sol", "Mi", "Re2", "Re2", "Ti", "Do2",
+    "Do2", "Sol", "La", "La", "Do2", "Ti", "La", "Sol", "La", "Sol", "Mi", "La",
+    "La", "Do2", "Ti", "La", "Sol", "La", "Sol", "Mi", "Re2", "Re2", "Fa2", "Re2",
+    "Ti", "Do2", "Mi2", "Do2", "Sol", "Mi", "Sol", "Fa", "Re", "Do"
+  ]
+}
