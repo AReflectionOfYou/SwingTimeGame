@@ -21,6 +21,8 @@ Play it at <https://areflectionofyou.github.io/SwingTimeGame/>.
 - App name and QR base address: `js/config.js` (the name also appears in `manifest.json`)
 - Songs: `songs/*.json`, listed in order in `songs/index.json` (the first is the Demo song)
 - Default note layouts for 1–4 phones: `data/default-layouts.json`
+- After changing any file in `css/` or `js/`, bump the `?v=` number on its links in every `.html` page
+  (for example `?v=2` → `?v=3`) so browsers fetch the new copy instead of a cached one.
 
 ### Printed QR codes
 
