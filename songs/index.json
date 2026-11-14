@@ -1,6 +1,7 @@
 {
   "_about": "Built-in songs, in picker order. The first one is the Demo song. Each id names songs/<id>.json.",
   "songs": [
+    "ode-to-joy",
     "hot-cross-buns",
     "au-clair-de-la-lune",
     "jingle-bells",
