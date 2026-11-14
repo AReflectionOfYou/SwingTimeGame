@@ -366,7 +366,7 @@ h3 {
   border-radius: 50%;
 }
 
-.size-btn.toddler .num {
+.size-btn.size-toddler .num {
   font-size: clamp(2.2rem, 5vw, 3.6rem);
 }
 

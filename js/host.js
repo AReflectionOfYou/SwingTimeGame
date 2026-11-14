@@ -138,7 +138,7 @@
     if (hasToddler(song)) {
       const b = document.createElement('button');
       b.type = 'button';
-      b.className = 'size-btn toddler';
+      b.className = 'size-btn size-toddler';
       b.innerHTML = '<span class="num">🔔</span><span class="what">Toddler</span>';
       b.addEventListener('click', () => go({ song: song.id, size: 'toddler' }));
       row.appendChild(b);
