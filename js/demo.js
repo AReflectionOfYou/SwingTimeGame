@@ -13,7 +13,7 @@
   let arrangement = null;
   let loopTimer = null;
   let soundOn = false;
-  const ringing = {}; // part name → its last bell voice
+  let ringing = []; // [{ voice, parts }]: sounding bells and the parts still holding each
 
   const clock = new BeatClock({
     bpm: 90,
@@ -21,18 +21,29 @@
       view.setPosition(pos);
       view.draw();
       if (soundOn && arrangement) {
-        arrangement.cues.forEach((c) => {
-          if (c.beat <= prev || c.beat > pos) return;
-          // Each part damps its previous bell when it moves on, so chords
-          // don't blur into the next one.
-          const before = ringing[c.part];
-          if (before && before.name !== c.note) bell.damp(before);
-          ringing[c.part] = bell.ringNote(c.note, { volume: 0.55 }) || before;
-        });
+        const due = arrangement.cues.filter((c) => c.beat > prev && c.beat <= pos);
+        if (due.length) ringCues(due);
       }
       if (arrangement && pos > arrangement.lastBeat + 2) loop();
     },
   });
+
+  // A part lets go of its previous bell when it moves on, even when it rings
+  // the same note again. A bell no part is holding any more is damped, so one
+  // chord doesn't blur into the next.
+  function ringCues(due) {
+    const moving = new Set();
+    due.forEach((c) => c.parts.forEach((p) => moving.add(p)));
+    ringing = ringing.filter((r) => {
+      r.parts = r.parts.filter((p) => !moving.has(p));
+      if (!r.parts.length) bell.damp(r.voice);
+      return r.parts.length > 0;
+    });
+    due.forEach((c) => {
+      const voice = bell.ringNote(c.note, { volume: 0.55 });
+      if (voice) ringing.push({ voice, parts: c.parts.slice() });
+    });
+  }
 
   function loop() {
     clock.pause();

@@ -4,7 +4,7 @@
 // synthesized bell so the app never goes silent. A compressor on the output
 // keeps chords (several bells at once, as in Demo mode) from clipping.
 
-const SOUNDS_VERSION = 1; // bump after regenerating the files in sounds/
+const SOUNDS_VERSION = 2; // bump after regenerating the files in sounds/
 
 class BellSynth {
   constructor() {

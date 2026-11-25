@@ -1,6 +1,7 @@
 // Loads song data and resolves an arrangement into what the screens need:
 // which phones exist, what each phone's gestures play, and a time-ordered
-// list of cues { phone, gesture, note, beat }.
+// list of cues { phone, gesture, note, beat, parts } (parts: every part that
+// rings that note then, since parts in unison share one bell).
 //
 // Song file shape (see songs/*.json):
 //   title, bpm, beatsPerMeasure
@@ -151,12 +152,15 @@ function resolveArrangement(song, size, defaultLayouts) {
   const byBeat = new Map();
   events.forEach((ev) => {
     if (!byBeat.has(ev.beat)) byBeat.set(ev.beat, []);
-    byBeat.get(ev.beat).push(ev);
+    // Parts in unison ring one bell between them.
+    const same = byBeat.get(ev.beat).find((e) => e.note === ev.note);
+    if (!same) byBeat.get(ev.beat).push({ note: ev.note, beat: ev.beat, parts: [ev.part] });
+    else if (!same.parts.includes(ev.part)) same.parts.push(ev.part);
   });
 
   const cues = [];
   const ring = (h, ev) => {
-    cues.push({ phone: h.phone, gesture: h.gesture, note: ev.note, beat: ev.beat, part: ev.part });
+    cues.push({ phone: h.phone, gesture: h.gesture, note: ev.note, beat: ev.beat, parts: ev.parts.slice() });
     lastCueBeat[h.phone] = ev.beat;
   };
   byBeat.forEach((evs, beat) => {
@@ -165,14 +169,14 @@ function resolveArrangement(song, size, defaultLayouts) {
     evs.forEach((ev) => {
       const hs = holders[ev.note];
       if (!hs) {
-        warnings.push(where + ': ' + ev.note + ' at beat ' + beat + ' (' + ev.part + ') is not on any phone');
+        warnings.push(where + ': ' + ev.note + ' at beat ' + beat + ' (' + ev.parts.join(', ') + ') is not on any phone');
       } else if (!isShared(ev.note)) {
         hs.forEach((h) => {
           ring(h, ev);
           busy.add(h.phone);
         });
-      } else if (!shared.some((s) => s.note === ev.note)) {
-        shared.push(ev); // the same note in two parts at once rings once
+      } else {
+        shared.push(ev);
       }
     });
     if (!shared.length) return;
@@ -205,7 +209,7 @@ function resolveArrangement(song, size, defaultLayouts) {
       warnings.push(where + ': explicit note ' + n.phone + '.' + n.gesture + ' has no note');
       return;
     }
-    cues.push({ phone: n.phone, gesture: n.gesture, note, beat: n.beat, part: 'notes' });
+    cues.push({ phone: n.phone, gesture: n.gesture, note, beat: n.beat, parts: ['notes'] });
   });
 
   // Drop exact duplicates; flag a phone asked to make two different swings
