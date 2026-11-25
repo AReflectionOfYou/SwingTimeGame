@@ -12,7 +12,7 @@
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="icons/icon-180.png" />
   <link rel="icon" href="icons/icon-192.png" />
-  <link rel="stylesheet" href="css/style.css?v=8" />
+  <link rel="stylesheet" href="css/style.css?v=9" />
   <!-- GoatCounter (cookie-free analytics) -->
   <script data-goatcounter="https://maherou-areflectionofyou.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>
@@ -23,8 +23,10 @@
     <p class="tagline">Every phone is a handbell. Swing it to ring.</p>
     <div class="lane-dots" id="lane-dots" aria-hidden="true"></div>
 
-    <a class="home-card home-demo" href="demo.html">▶ Demo
+    <a class="home-card home-demo" id="demo-link" href="demo.html">▶ Demo
       <small>Hear a song play on this phone</small></a>
+    <label class="demo-song" id="demo-song-row" style="visibility: hidden">Demo song
+      <select id="demo-song" autocomplete="off"></select></label>
 
     <a class="home-card" href="host.html">Host a game
       <small>On the iPad, laptop or TV everyone can see. Pick a song, then each phone scans a code.</small></a>
@@ -49,7 +51,7 @@
     <p class="about-credit">Bell sounds: “Hand Bells, Singles” pack by InspectorJ
       (<a href="https://www.jshaw.co.uk" target="_blank" rel="noopener">www.jshaw.co.uk</a>) of
       <a href="https://freesound.org/people/InspectorJ/packs/19255/" target="_blank" rel="noopener">Freesound.org</a>,
-      CC BY 4.0. Trimmed, level-matched, and pitch-shifted for the lower octave.</p>
+      CC BY 4.0. Trimmed, retuned, level-matched, and pitch-shifted for the lower octave.</p>
     <p class="about-links">
       <a href="https://opensource.org/license/mit" target="_blank" rel="noopener">MIT License</a>
       <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>
@@ -57,12 +59,34 @@
     <button type="button" class="btn" id="about-close">Close</button>
   </dialog>
 
-  <script src="js/config.js?v=8"></script>
-  <script src="js/lanes.js?v=8"></script>
+  <script src="js/config.js?v=9"></script>
+  <script src="js/lanes.js?v=9"></script>
+  <script src="js/songs.js?v=9"></script>
   <script>
     document.getElementById('lane-dots').innerHTML = LANES.map(
       (l) => '<span style="background:' + l.color + '"></span>'
     ).join('');
+
+    // Demo song picker. The first song is the default; if the list can't be
+    // loaded the picker goes away and the Demo plays that song. Until then it is
+    // invisible but keeps its space, so the cards don't jump under a finger.
+    const songRow = document.getElementById('demo-song-row');
+    loadAllSongs().then((songs) => {
+      const select = document.getElementById('demo-song');
+      songs.forEach((s) => select.add(new Option(s.title, s.id)));
+      const update = () => {
+        const first = select.selectedIndex <= 0;
+        document.getElementById('demo-link').href =
+          'demo.html' + (first ? '' : '?song=' + encodeURIComponent(select.value));
+      };
+      select.addEventListener('change', update);
+      window.addEventListener('pageshow', update); // Back may restore an earlier choice
+      update();
+      songRow.style.visibility = '';
+    }).catch((err) => {
+      console.warn('[home] Song list unavailable:', err.message);
+      songRow.hidden = true;
+    });
 
     // About panel: a native <dialog>, so Escape closes it for free.
     (function () {

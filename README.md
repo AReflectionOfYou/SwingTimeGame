@@ -10,7 +10,7 @@ Play it at <https://areflectionofyou.github.io/SwingTimeGame/>.
 
 ## Pages
 
-- `index.html` — home: Demo, Host a game, Toddler mode, Ring on this phone
+- `index.html` — home: Demo (with a song picker), Host a game, Toddler mode, Ring on this phone
 - `host.html` — shared screen: song → number of phones → QR codes → Start → lane score
 - `play.html` — the phone (configured by the QR link: `?song=…&size=…&player=…`, or `?song=…&mode=toddler`)
 - `demo.html` — self-playing, looping demo on one phone; `demo.html?song=<id>` plays any song
@@ -23,8 +23,9 @@ Play it at <https://areflectionofyou.github.io/SwingTimeGame/>.
 - Songs: `songs/*.json`, listed in order in `songs/index.json` (the first is the Demo song).
   A part is a string of notes, one beat each by default; `Sol/0.75` gives a note its own
   length in beats, `-` is a rest and `|` a bar line. An arrangement's `"alternate": ["Mi"]`
-  makes phones that share a note take turns instead of ringing together. The format is
-  described at the top of `js/songs.js`.
+  makes phones that share a note take turns instead of ringing together. Parts that have the
+  same note at the same moment ring one bell. The format is described at the top of `js/songs.js`.
+- To hear a song while editing it, open `demo.html?song=<id>`. It plays the song's largest arrangement.
 - Default note layouts for 1–4 phones: `data/default-layouts.json`
 - After changing any file in `css/` or `js/`, bump the `?v=` number on its links in every `.html` page
   (for example `?v=2` → `?v=3`) so browsers fetch the new copy instead of a cached one.
@@ -51,8 +52,22 @@ The bell sounds are the "Hand Bells, Singles" pack by InspectorJ (www.jshaw.co.u
 Freesound.org, under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). They are
 not covered by the license notices below. Sources, links and the changes made are in
 [sounds/CREDITS.md](sounds/CREDITS.md). To rebuild the app's sound files from
-`sounds/source/`, run `python3 tools/prepare-sounds.py` on a Mac, then bump
-`SOUNDS_VERSION` in `js/audio.js`.
+`sounds/source/`, run `python3 tools/prepare-sounds.py` on a Mac (about a minute), then bump
+`SOUNDS_VERSION` in `js/audio.js`. The script also retunes each bell, because the recordings'
+overtones clash in chords. For a brighter or mellower sound, change `OVERTONE_DB` and `REST_DB`
+at the top of the script.
+
+## Music sources
+
+The tunes are traditional or in the public domain. Several were checked against scores from the
+[Open Hymnal Project](https://github.com/mzealey/openhymnal) and the
+[Mutopia Project](https://www.mutopiaproject.org/). Where a song file has an `_about` note, it gives
+that song's source and anything simplified to fit the bells.
+
+## Analytics
+
+The pages count visits with [GoatCounter](https://www.goatcounter.com/), which uses no cookies. If you
+publish your own copy, remove its script from each `.html` page or point it at your own account.
 
 ## License
 

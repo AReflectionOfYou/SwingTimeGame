@@ -206,6 +206,23 @@ h3 {
   color: rgba(20, 17, 10, 0.75);
 }
 
+/* Picks the song the Demo card above it plays. */
+.demo-song {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 4px 20px;
+  font-weight: 700;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.demo-song select {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+}
+
 .lane-dots {
   display: flex;
   gap: 8px;
