@@ -1,5 +1,6 @@
-// Demo: the first built-in song plays itself on this phone, every lane ringing
-// through the speaker, then loops. It starts scrolling straight away, silent;
+// Demo: a song plays itself on this phone, every lane ringing through the
+// speaker, then loops. It is the first built-in song unless the address names
+// another one (demo.html?song=<id>). It starts scrolling straight away, silent;
 // the first tap anywhere unlocks audio (iOS requires a touch first). No motion
 // permission is ever needed.
 (function () {
@@ -79,7 +80,7 @@
   );
 
   Promise.all([loadSongIndex(), loadDefaultLayouts()])
-    .then(([ids, defaults]) => loadSong(ids[0]).then((song) => [song, defaults]))
+    .then(([ids, defaults]) => loadSong(new URLSearchParams(location.search).get('song') || ids[0]).then((song) => [song, defaults]))
     .then(([song, defaults]) => {
       // Show the most lanes the song offers, so several colors ring together.
       const sizes = availableSizes(song);
