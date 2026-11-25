@@ -2,7 +2,7 @@
   "title": "Silent Night",
   "bpm": 56,
   "beatsPerMeasure": 3,
-  "_about": "PROPOSED for owner review. Tune STILLE NACHT (Gruber), checked note for note against the public-domain Mutopia Project score, transposed from B-flat to C. 6/8 time, counted here as 3 quarter-note beats per bar. The melody uses 11 different notes (Do up to high Fa).",
+  "_about": "Tune STILLE NACHT (Gruber), checked note for note against the public-domain Mutopia Project score, transposed from B-flat to C. 6/8 time, counted here as 3 quarter-note beats per bar. The melody uses 11 different notes (Do up to high Fa).",
   "parts": {
     "melody":
       "Sol/0.75 La/0.25 Sol/0.5 Mi/1.5 | Sol/0.75 La/0.25 Sol/0.5 Mi/1.5 | Re2/1 Re2/0.5 Ti/1.5 | Do2/1 Do2/0.5 Sol/1.5 | La/1 La/0.5 Do2/0.75 Ti/0.25 La/0.5 | Sol/0.75 La/0.25 Sol/0.5 Mi/1.5 | La/1 La/0.5 Do2/0.75 Ti/0.25 La/0.5 | Sol/0.75 La/0.25 Sol/0.5 Mi/1.5 | Re2/1 Re2/0.5 Fa2/0.75 Re2/0.25 Ti/0.5 | Do2/1.5 Mi2/1.5 | Do2/0.75 Sol/0.25 Mi/0.5 Sol/0.75 Fa/0.25 Re/0.5 | Do/3",

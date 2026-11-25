@@ -2,7 +2,7 @@
   "title": "Jingle Bells (chorus)",
   "bpm": 100,
   "beatsPerMeasure": 4,
-  "_about": "PROPOSED for owner review. Chorus only, from the 1857 tune as sung today (checked against an ABC transcription). Melody in the upper octave (C6 up to G6, real recordings); bass on the lower octave. One beat = a quarter note.",
+  "_about": "Chorus only, from the 1857 tune as sung today (checked against an ABC transcription). Melody in the upper octave (C6 up to G6, real recordings); bass on the lower octave. One beat = a quarter note.",
   "parts": {
     "melody":
       "Mi2 Mi2 Mi2/2 | Mi2 Mi2 Mi2/2 | Mi2 Sol2 Do2/1.5 Re2/0.5 | Mi2/4 | Fa2 Fa2 Fa2/1.5 Fa2/0.5 | Fa2 Mi2 Mi2 Mi2/0.5 Mi2/0.5 | Mi2 Re2 Re2 Mi2 | Re2/2 Sol2/2 | Mi2 Mi2 Mi2/2 | Mi2 Mi2 Mi2/2 | Mi2 Sol2 Do2/1.5 Re2/0.5 | Mi2/4 | Fa2 Fa2 Fa2/1.5 Fa2/0.5 | Fa2 Mi2 Mi2 Mi2/0.5 Mi2/0.5 | Sol2 Sol2 Fa2 Re2 | Do2/4",

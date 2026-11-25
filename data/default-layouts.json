@@ -1,5 +1,5 @@
 {
-  "_about": "PROPOSED default note layouts for 1 to 4 phones, for owner review. A song can say \"layout\": \"default\" to use these, or give its own layout. Keys starting with _ are comments. Each phone (A-D) holds exactly four notes, one per gesture; forward and back carry each phone's most-used notes.",
+  "_about": "Default note layouts for 1 to 4 phones. A song can say \"layout\": \"default\" to use these, or give its own layout. Keys starting with _ are comments. Each phone (A-D) holds exactly four notes, one per gesture; forward and back carry each phone's most-used notes.",
 
   "1": {
     "_why": "Do Re Mi Sol covers the opening of most simple tunes. Fa, La and Ti are missing, so most songs need their own 1-phone layout.",
