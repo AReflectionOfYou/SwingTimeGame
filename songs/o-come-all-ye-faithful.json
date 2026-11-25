@@ -1,0 +1,42 @@
+{
+  "title": "O Come, All Ye Faithful",
+  "bpm": 84,
+  "beatsPerMeasure": 4,
+  "_about": "PROPOSED for owner review. Tune ADESTE FIDELES, checked note for note against the Open Hymnal Project score (public domain), transposed from G to C. It runs from low Sol to Sol2. Bass is the score's bass on the first beat of each bar. One beat = a quarter note (4/4).",
+  "parts": {
+    "melody":
+      "-/3 Do2 | Do2/2 Sol Do2 | Re2/2 Sol/2 | Mi2 Re2 Mi2 Fa2 | Mi2/2 Re2 Do2 | Do2/2 Ti La | Ti Do2 Re2 Mi2 | Ti/2 La/1.5 Sol/0.5 | Sol/3 - | Sol2/2 Fa2 Mi2 | Fa2/2 Mi2/2 | Re2 Mi2 Do2 Re2 | Ti/1.5 La/0.5 Sol Do2 | Do2 Ti Do2 Re2 | Do2/2 Sol Mi2 | Mi2 Re2 Mi2 Fa2 | Mi2/2 Re2 Mi2 | Fa2 Mi2 Re2 Do2 | Ti/2 Do2 Fa2 | Mi2/2 Re2/1.5 Do2/0.5 | Do2/3",
+    "bass":
+      "-/4 Do/4 | Ti/4 | Do/4 | Sol/4 | La/4 | Sol/4 | Re/4 | Sol/4 | Mi/4 | Re/4 | Ti/4 | Sol/4 | Mi/4 | Mi/4 | Do/4 | Do/4 | Re/4 | Sol/4 | Sol/4 | Do/3"
+  },
+  "_arrangements": "Layouts proposed by a search that keeps every phone from ringing two notes at once and spreads quick notes between players. 1 and 2 phones play the melody only; 3 and 4 phones add the bass where it fits. Notes listed in 'alternate' sit on two phones and take turns. Spare gestures hold notes this song never uses, so a stray swing stays harmless. Sizes offered: 2, 3, 4.",
+  "arrangements": {
+    "2": {
+      "parts": ["melody"],
+      "layout": {
+        "A": {"forward": "Re2", "back": "Sol", "left": "Ti", "right": "Fa2"},
+        "B": {"forward": "Do2", "back": "Mi2", "left": "La", "right": "Sol2"}
+      }
+    },
+    "3": {
+      "parts": ["melody"],
+      "alternate": ["Sol", "Ti", "Do2"],
+      "layout": {
+        "A": {"forward": "Mi2", "back": "Do2", "left": "Ti", "right": "Do3"},
+        "B": {"forward": "Re2", "back": "Fa2", "left": "Sol", "right": "Ti"},
+        "C": {"forward": "Do2", "back": "La", "left": "Sol", "right": "Sol2"}
+      }
+    },
+    "4": {
+      "parts": ["melody", "bass"],
+      "alternate": ["Sol", "La", "Do2", "Re2"],
+      "layout": {
+        "A": {"forward": "Re2", "back": "Do2", "left": "Re", "right": "La"},
+        "B": {"forward": "Ti", "back": "Fa2", "left": "Sol", "right": "Sol2"},
+        "C": {"forward": "Mi2", "back": "Do2", "left": "Re2", "right": "Do3"},
+        "D": {"forward": "Sol", "back": "Do", "left": "Mi", "right": "La"}
+      }
+    }
+  },
+  "melody": ["Do2", "Do2", "Sol", "Do2", "Re2", "Sol", "Mi2", "Re2", "Mi2", "Fa2", "Mi2", "Re2", "Do2", "Do2", "Ti", "La", "Ti", "Do2", "Re2", "Mi2", "Ti", "La", "Sol", "Sol", "Sol2", "Fa2", "Mi2", "Fa2", "Mi2", "Re2", "Mi2", "Do2", "Re2", "Ti", "La", "Sol", "Do2", "Do2", "Ti", "Do2", "Re2", "Do2", "Sol", "Mi2", "Mi2", "Re2", "Mi2", "Fa2", "Mi2", "Re2", "Mi2", "Fa2", "Mi2", "Re2", "Do2", "Ti", "Do2", "Fa2", "Mi2", "Re2", "Do2", "Do2"]
+}

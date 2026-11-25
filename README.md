@@ -13,7 +13,8 @@ Play it at <https://areflectionofyou.github.io/SwingTimeGame/>.
 - `index.html` — home: Demo, Host a game, Toddler mode, Ring on this phone
 - `host.html` — shared screen: song → number of phones → QR codes → Start → lane score
 - `play.html` — the phone (configured by the QR link: `?song=…&size=…&player=…`, or `?song=…&mode=toddler`)
-- `demo.html` — self-playing, looping demo on one phone
+- `demo.html` — self-playing, looping demo on one phone; `demo.html?song=<id>` plays any song
+  (the id is its file name in `songs/`, without `.json`)
 - `debug.html` — live sensor readout and threshold sliders
 
 ## Editing

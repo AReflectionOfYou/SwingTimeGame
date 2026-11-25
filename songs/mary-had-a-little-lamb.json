@@ -1,0 +1,48 @@
+{
+  "title": "Mary Had a Little Lamb",
+  "bpm": 100,
+  "beatsPerMeasure": 4,
+  "_about": "PROPOSED for owner review. Traditional nursery tune (Lowell Mason, 1830s), written from the standard melody, not checked against a printed score; it is short and simple enough to check by ear. Melody in the upper octave (real recordings), only four notes, so it also has a 1-phone version. One beat = a quarter note.",
+  "parts": {
+    "melody":
+      "Mi2 Re2 Do2 Re2 | Mi2 Mi2 Mi2/2 | Re2 Re2 Re2/2 | Mi2 Sol2 Sol2/2 | Mi2 Re2 Do2 Re2 | Mi2 Mi2 Mi2 Mi2 | Re2 Re2 Mi2 Re2 | Do2/4",
+    "bass":
+      "Do/4 | Do/4 | Sol/4 | Do/4 | Do/4 | Do/4 | Sol/4 | Do/4"
+  },
+  "_arrangements": "Layouts proposed by a search that keeps every phone from ringing two notes at once and spreads quick notes between players. 1 and 2 phones play the melody only; 3 and 4 phones add the bass where it fits. Notes listed in 'alternate' sit on two phones and take turns. Spare gestures hold notes this song never uses, so a stray swing stays harmless. Sizes offered: 1, 2, 3, 4.",
+  "arrangements": {
+    "1": {
+      "parts": ["melody"],
+      "layout": {
+        "A": {"forward": "Mi2", "back": "Re2", "left": "Do2", "right": "Sol2"}
+      }
+    },
+    "2": {
+      "parts": ["melody"],
+      "layout": {
+        "A": {"forward": "Mi2", "back": "Do2", "left": "Do3", "right": "Sol"},
+        "B": {"forward": "Re2", "back": "Sol2", "left": "Do3", "right": "Sol"}
+      }
+    },
+    "3": {
+      "parts": ["melody", "bass"],
+      "alternate": ["Mi2"],
+      "layout": {
+        "A": {"forward": "Mi2", "back": "Do2", "left": "Do3", "right": "Mi"},
+        "B": {"forward": "Do", "back": "Sol", "left": "Mi2", "right": "Do3"},
+        "C": {"forward": "Re2", "back": "Sol2", "left": "Do3", "right": "Mi"}
+      }
+    },
+    "4": {
+      "parts": ["melody", "bass"],
+      "alternate": ["Mi2"],
+      "layout": {
+        "A": {"forward": "Do", "back": "Mi2", "left": "Do3", "right": "Mi"},
+        "B": {"forward": "Mi2", "back": "Do3", "left": "Mi", "right": "La2"},
+        "C": {"forward": "Re2", "back": "Do3", "left": "Mi", "right": "La2"},
+        "D": {"forward": "Do2", "back": "Sol", "left": "Sol2", "right": "Do3"}
+      }
+    }
+  },
+  "melody": ["Mi2", "Re2", "Do2", "Re2", "Mi2", "Mi2", "Mi2", "Re2", "Re2", "Re2", "Mi2", "Sol2", "Sol2", "Mi2", "Re2", "Do2", "Re2", "Mi2", "Mi2", "Mi2", "Mi2", "Re2", "Re2", "Mi2", "Re2", "Do2"]
+}

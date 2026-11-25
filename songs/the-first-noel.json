@@ -1,0 +1,42 @@
+{
+  "title": "The First Noel",
+  "bpm": 84,
+  "beatsPerMeasure": 3,
+  "_about": "PROPOSED for owner review. Tune THE FIRST NOWELL, checked note for note against the Open Hymnal Project score (public domain), transposed from D to C. Melody in the upper octave, Do2 to Do3 (real recordings). Bass is the score's bass on the first beat of each bar. One beat = a quarter note (3/4).",
+  "parts": {
+    "melody":
+      "-/2 Mi2/0.5 Re2/0.5 | Do2/1.5 Re2/0.5 Mi2/0.5 Fa2/0.5 | Sol2/2 La2/0.5 Ti2/0.5 | Do3 Ti2 La2 | Sol2/2 La2/0.5 Ti2/0.5 | Do3 Ti2 La2 | Sol2 La2 Ti2 | Do3 Sol2 Fa2 | Mi2/2 Mi2/0.5 Re2/0.5 | Do2/1.5 Re2/0.5 Mi2/0.5 Fa2/0.5 | Sol2/2 La2/0.5 Ti2/0.5 | Do3 Ti2 La2 | Sol2/2 La2/0.5 Ti2/0.5 | Do3 Ti2 La2 | Sol2 La2 Ti2 | Do3 Sol2 Fa2 | Mi2/2 Mi2/0.5 Re2/0.5 | Do2/1.5 Re2/0.5 Mi2/0.5 Fa2/0.5 | Sol2/2 Do3/0.5 Ti2/0.5 | La2/2 La2 | Sol2/2 Sol2 | Do3 Ti2 La2 | Sol2 La2 Ti2 | Do3 Sol2 Fa2 | Mi2/2",
+    "bass":
+      "-/3 Do/3 | Sol/3 | Mi/3 | Do/3 | Mi/3 | Mi/3 | Mi/3 | Do/3 | Do/3 | Sol/3 | Mi/3 | Do/3 | Mi/3 | Mi/3 | Mi/3 | Do/3 | Do/3 | Mi/3 | Fa/3 | Do/3 | La/3 | Do/3 | Mi/3 | Do/2"
+  },
+  "_arrangements": "Layouts proposed by a search that keeps every phone from ringing two notes at once and spreads quick notes between players. 1 and 2 phones play the melody only; 3 and 4 phones add the bass where it fits. Notes listed in 'alternate' sit on two phones and take turns. Spare gestures hold notes this song never uses, so a stray swing stays harmless. Sizes offered: 2, 3, 4.",
+  "arrangements": {
+    "2": {
+      "parts": ["melody"],
+      "layout": {
+        "A": {"forward": "Sol2", "back": "Ti2", "left": "Mi2", "right": "Do2"},
+        "B": {"forward": "La2", "back": "Do3", "left": "Re2", "right": "Fa2"}
+      }
+    },
+    "3": {
+      "parts": ["melody"],
+      "alternate": ["Sol2"],
+      "layout": {
+        "A": {"forward": "Mi2", "back": "Do3", "left": "Sol2", "right": "Sol"},
+        "B": {"forward": "Ti2", "back": "Sol2", "left": "Re2", "right": "Sol"},
+        "C": {"forward": "La2", "back": "Fa2", "left": "Do2", "right": "Sol"}
+      }
+    },
+    "4": {
+      "parts": ["melody", "bass"],
+      "alternate": ["Sol2"],
+      "layout": {
+        "A": {"forward": "Ti2", "back": "Sol2", "left": "Re2", "right": "Ti"},
+        "B": {"forward": "Do", "back": "Mi", "left": "Sol", "right": "Fa"},
+        "C": {"forward": "Do3", "back": "Fa2", "left": "Sol2", "right": "Do2"},
+        "D": {"forward": "La2", "back": "Mi2", "left": "La", "right": "Ti"}
+      }
+    }
+  },
+  "melody": ["Mi2", "Re2", "Do2", "Re2", "Mi2", "Fa2", "Sol2", "La2", "Ti2", "Do3", "Ti2", "La2", "Sol2", "La2", "Ti2", "Do3", "Ti2", "La2", "Sol2", "La2", "Ti2", "Do3", "Sol2", "Fa2", "Mi2", "Mi2", "Re2", "Do2", "Re2", "Mi2", "Fa2", "Sol2", "La2", "Ti2", "Do3", "Ti2", "La2", "Sol2", "La2", "Ti2", "Do3", "Ti2", "La2", "Sol2", "La2", "Ti2", "Do3", "Sol2", "Fa2", "Mi2", "Mi2", "Re2", "Do2", "Re2", "Mi2", "Fa2", "Sol2", "Do3", "Ti2", "La2", "La2", "Sol2", "Sol2", "Do3", "Ti2", "La2", "Sol2", "La2", "Ti2", "Do3", "Sol2", "Fa2", "Mi2"]
+}
