@@ -1,0 +1,43 @@
+{
+  "title": "Amazing Grace",
+  "bpm": 66,
+  "beatsPerMeasure": 3,
+  "_about": "PROPOSED for owner review. Tune NEW BRITAIN, checked note for note against the Open Hymnal Project score (public domain), transposed from G to C. The tune dips below its home note, so it runs from low Sol to Sol2. Bass is the score's bass on the first beat of each bar. One beat = a quarter note (3/4).",
+  "parts": {
+    "melody":
+      "-/2 Sol | Do2/2 Mi2/0.5 Do2/0.5 | Mi2/2 Re2 | Do2/2 La | Sol/2 Sol | Do2/2 Mi2/0.5 Do2/0.5 | Mi2/2 Re2 | Sol2/5 Mi2 | Sol2/1.5 Mi2/0.5 Sol2/0.5 Mi2/0.5 | Do2/2 Sol | La/1.5 Do2/0.5 Do2/0.5 La/0.5 | Sol/2 Sol | Do2/2 Mi2/0.5 Do2/0.5 | Mi2/2 Re2 | Do2/5",
+    "bass":
+      "-/3 Do/3 | Sol/3 | La/3 | Do/3 | Do/3 | Sol/3 | Mi/6 | Do/3 | Mi/3 | Fa/3 | Do/3 | La/3 | Sol/3 | Do/5"
+  },
+  "_arrangements": "Layouts proposed by a search that keeps every phone from ringing two notes at once and spreads quick notes between players. 1 and 2 phones play the melody only; 3 and 4 phones add the bass where it fits. Notes listed in 'alternate' sit on two phones and take turns. Spare gestures hold notes this song never uses, so a stray swing stays harmless. Sizes offered: 2, 3, 4.",
+  "arrangements": {
+    "2": {
+      "parts": ["melody"],
+      "alternate": ["Sol"],
+      "layout": {
+        "A": {"forward": "Mi2", "back": "Sol", "left": "La", "right": "Re2"},
+        "B": {"forward": "Do2", "back": "Sol", "left": "Sol2", "right": "Do3"}
+      }
+    },
+    "3": {
+      "parts": ["melody", "bass"],
+      "alternate": ["Do", "Sol", "Do2"],
+      "layout": {
+        "A": {"forward": "Mi2", "back": "Do", "left": "Do2", "right": "Fa"},
+        "B": {"forward": "Sol", "back": "La", "left": "Do", "right": "Mi"},
+        "C": {"forward": "Do2", "back": "Re2", "left": "Sol2", "right": "Sol"}
+      }
+    },
+    "4": {
+      "parts": ["melody", "bass"],
+      "alternate": ["Do", "Do2"],
+      "layout": {
+        "A": {"forward": "Do", "back": "Re2", "left": "Mi", "right": "Do2"},
+        "B": {"forward": "Mi2", "back": "La", "left": "Do3", "right": "La2"},
+        "C": {"forward": "Sol", "back": "Sol2", "left": "Fa", "right": "Do3"},
+        "D": {"forward": "Do2", "back": "Do", "left": "Do3", "right": "La2"}
+      }
+    }
+  },
+  "melody": ["Sol", "Do2", "Mi2", "Do2", "Mi2", "Re2", "Do2", "La", "Sol", "Sol", "Do2", "Mi2", "Do2", "Mi2", "Re2", "Sol2", "Mi2", "Sol2", "Mi2", "Sol2", "Mi2", "Do2", "Sol", "La", "Do2", "Do2", "La", "Sol", "Sol", "Do2", "Mi2", "Do2", "Mi2", "Re2", "Do2"]
+}

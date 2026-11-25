@@ -1,0 +1,42 @@
+{
+  "title": "Good King Wenceslas",
+  "bpm": 96,
+  "beatsPerMeasure": 4,
+  "_about": "PROPOSED for owner review. Tune TEMPUS ADEST FLORIDUM, checked note for note against the Mutopia Project score (public domain, from Hutchins, Carols Old and Carols New, 1916), transposed from A to C. The tune dips a fifth below its home note, so it runs from low Sol to Sol2. Bass is the score's bass on the first beat of each bar. One beat = a quarter note.",
+  "parts": {
+    "melody":
+      "Do2 Do2 Do2 Re2 | Do2 Do2 Sol/2 | La Sol La Ti | Do2/2 Do2/2 | Do2 Do2 Do2 Re2 | Do2 Do2 Sol/2 | La Sol La Ti | Do2/2 Do2/2 | Sol2 Fa2 Mi2 Re2 | Mi2 Re2 Do2/2 | La Sol La Ti | Do2/2 Do2/2 | Sol Sol La Ti | Do2 Do2 Re2/2 | Sol2 Fa2 Mi2 Re2 | Do2/2 Fa2/2 | Do2/4",
+    "bass":
+      "Do/4 | Do/4 | Fa/4 | Do/4 | Do/4 | Do/4 | Fa/4 | Do/4 | Mi/4 | Do/4 | Fa/4 | Do/4 | Mi/4 | La/4 | Mi/4 | La/4 | Do/4"
+  },
+  "_arrangements": "Layouts proposed by a search that keeps every phone from ringing two notes at once and spreads quick notes between players. 1 and 2 phones play the melody only; 3 and 4 phones add the bass where it fits. Notes listed in 'alternate' sit on two phones and take turns. Spare gestures hold notes this song never uses, so a stray swing stays harmless. Sizes offered: 2, 3, 4.",
+  "arrangements": {
+    "2": {
+      "parts": ["melody"],
+      "layout": {
+        "A": {"forward": "Sol", "back": "Re2", "left": "Ti", "right": "Fa2"},
+        "B": {"forward": "Do2", "back": "La", "left": "Mi2", "right": "Sol2"}
+      }
+    },
+    "3": {
+      "parts": ["melody", "bass"],
+      "alternate": ["Do2"],
+      "layout": {
+        "A": {"forward": "Do", "back": "La", "left": "Mi", "right": "Do2"},
+        "B": {"forward": "Sol", "back": "Re2", "left": "Ti", "right": "Fa2"},
+        "C": {"forward": "Do2", "back": "Fa", "left": "Mi2", "right": "Sol2"}
+      }
+    },
+    "4": {
+      "parts": ["melody", "bass"],
+      "alternate": ["Do"],
+      "layout": {
+        "A": {"forward": "Re2", "back": "Ti", "left": "Fa", "right": "Fa2"},
+        "B": {"forward": "Do", "back": "Sol", "left": "Sol2", "right": "Do3"},
+        "C": {"forward": "Do2", "back": "Do3", "left": "La2", "right": "Ti2"},
+        "D": {"forward": "La", "back": "Mi", "left": "Mi2", "right": "Do"}
+      }
+    }
+  },
+  "melody": ["Do2", "Do2", "Do2", "Re2", "Do2", "Do2", "Sol", "La", "Sol", "La", "Ti", "Do2", "Do2", "Do2", "Do2", "Do2", "Re2", "Do2", "Do2", "Sol", "La", "Sol", "La", "Ti", "Do2", "Do2", "Sol2", "Fa2", "Mi2", "Re2", "Mi2", "Re2", "Do2", "La", "Sol", "La", "Ti", "Do2", "Do2", "Sol", "Sol", "La", "Ti", "Do2", "Do2", "Re2", "Sol2", "Fa2", "Mi2", "Re2", "Do2", "Fa2", "Do2"]
+}

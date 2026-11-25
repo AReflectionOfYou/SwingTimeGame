@@ -1,0 +1,42 @@
+{
+  "title": "Away in a Manger",
+  "bpm": 76,
+  "beatsPerMeasure": 3,
+  "_about": "PROPOSED for owner review. Tune MUELLER (James R. Murray, 1887), checked note for note against the Open Hymnal Project score (from Hymnal for American Youth, 1919; public domain), transposed from F to C. It runs from low Sol to Sol2. Bass is the score's bass on the first beat of each bar. One beat = a quarter note (3/4).",
+  "parts": {
+    "melody":
+      "-/2 Sol2 | Sol2/1.5 Fa2/0.5 Mi2 | Mi2/1.5 Re2/0.5 Do2 | Do2 Ti La | Sol/2 Sol | Sol/1.5 La/0.5 Sol | Sol Re2 Ti | La Sol Do2 | Mi2/2 Sol2 | Sol2/1.5 Fa2/0.5 Mi2 | Mi2/1.5 Re2/0.5 Do2 | Do2 Ti La | Sol/2 Sol | Fa2/1.5 Mi2/0.5 Re2 | Mi2 Re2 Do2 | Re2 La Ti | Do2/2",
+    "bass":
+      "-/3 Do/3 | Do/3 | Fa/3 | Do/3 | Sol/3 | Sol/3 | Do/3 | Do/3 | Do/3 | Do/3 | Fa/3 | Do/3 | Sol/3 | Do/3 | Fa/3 | Do/2"
+  },
+  "_arrangements": "Layouts proposed by a search that keeps every phone from ringing two notes at once and spreads quick notes between players. 1 and 2 phones play the melody only; 3 and 4 phones add the bass where it fits. Notes listed in 'alternate' sit on two phones and take turns. Spare gestures hold notes this song never uses, so a stray swing stays harmless. Sizes offered: 2, 3, 4.",
+  "arrangements": {
+    "2": {
+      "parts": ["melody"],
+      "layout": {
+        "A": {"forward": "Sol", "back": "Re2", "left": "Ti", "right": "Fa2"},
+        "B": {"forward": "Do2", "back": "Mi2", "left": "La", "right": "Sol2"}
+      }
+    },
+    "3": {
+      "parts": ["melody", "bass"],
+      "alternate": ["Re2", "Mi2"],
+      "layout": {
+        "A": {"forward": "Do2", "back": "La", "left": "Mi2", "right": "Sol2"},
+        "B": {"forward": "Do", "back": "Fa", "left": "Fa2", "right": "Re2"},
+        "C": {"forward": "Sol", "back": "Re2", "left": "Ti", "right": "Mi2"}
+      }
+    },
+    "4": {
+      "parts": ["melody", "bass"],
+      "alternate": ["Sol"],
+      "layout": {
+        "A": {"forward": "Do2", "back": "La", "left": "Sol", "right": "Do3"},
+        "B": {"forward": "Do", "back": "Fa", "left": "Do3", "right": "Mi"},
+        "C": {"forward": "Mi2", "back": "Sol", "left": "Ti", "right": "Do3"},
+        "D": {"forward": "Re2", "back": "Sol2", "left": "Fa2", "right": "Do3"}
+      }
+    }
+  },
+  "melody": ["Sol2", "Sol2", "Fa2", "Mi2", "Mi2", "Re2", "Do2", "Do2", "Ti", "La", "Sol", "Sol", "Sol", "La", "Sol", "Sol", "Re2", "Ti", "La", "Sol", "Do2", "Mi2", "Sol2", "Sol2", "Fa2", "Mi2", "Mi2", "Re2", "Do2", "Do2", "Ti", "La", "Sol", "Sol", "Fa2", "Mi2", "Re2", "Mi2", "Re2", "Do2", "Re2", "La", "Ti", "Do2"]
+}
