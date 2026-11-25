@@ -20,7 +20,7 @@ Play it at <https://areflectionofyou.github.io/SwingTimeGame/>.
 ## Editing
 
 - App name and QR base address: `js/config.js` (the name also appears in `manifest.json`)
-- Songs: `songs/*.json`, listed in order in `songs/index.json` (the first is the Demo song).
+- Songs: `songs/*.json`, listed in order in `songs/index.json` (the first is the default Demo song).
   A part is a string of notes, one beat each by default; `Sol/0.75` gives a note its own
   length in beats, `-` is a rest and `|` a bar line. An arrangement's `"alternate": ["Mi"]`
   makes phones that share a note take turns instead of ringing together. Parts that have the
@@ -66,8 +66,8 @@ that song's source and anything simplified to fit the bells.
 
 ## Analytics
 
-The pages count visits with [GoatCounter](https://www.goatcounter.com/), which uses no cookies. If you
-publish your own copy, remove its script from each `.html` page or point it at your own account.
+Every page except `debug.html` counts visits with [GoatCounter](https://www.goatcounter.com/), which uses no cookies. If you
+publish your own copy, remove its script from those pages or point it at your own account.
 
 ## License
 
