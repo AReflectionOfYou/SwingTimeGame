@@ -25,7 +25,8 @@ Michael A. Heroux's own work. They are third-party recordings, used under their 
 The source files are Freesound's 128 kbps MP3 previews of the original recordings.
 
 **Changes made:** `tools/prepare-sounds.py` trims the silence before each strike, shortens
-each recording to 3 seconds with a fade-out, adjusts levels so the notes match, and
-re-encodes them as `sounds/c6.m4a` … `sounds/c7.m4a`. The app's lower octave plays the
+each recording to 3 seconds with a fade-out, retunes each bell (the note to exact pitch,
+its main overtone to a twelfth above and quieter, its other overtones quieter), adjusts
+levels so the notes match, and re-encodes them as `sounds/c6.m4a` … `sounds/c7.m4a`. The app's lower octave plays the
 same recordings at half speed, one octave lower (marked `"shifted"` in
 `sounds/manifest.json`).
