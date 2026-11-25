@@ -9,7 +9,7 @@
     "bass":
       "-/3 Do/3 | Sol/3 | La/3 | Do/3 | Do/3 | Sol/3 | Mi/6 | Do/3 | Mi/3 | Fa/3 | Do/3 | La/3 | Sol/3 | Do/5"
   },
-  "_arrangements": "Layouts proposed by a search that keeps every phone from ringing two notes at once and spreads quick notes between players. 1 and 2 phones play the melody only; 3 and 4 phones add the bass where it fits. Notes listed in 'alternate' sit on two phones and take turns. Spare gestures hold notes this song never uses, so a stray swing stays harmless. Sizes offered: 2, 3, 4.",
+  "_arrangements": "Layouts found by a search that keeps every phone from ringing two notes at once and spreads quick notes between players. 1 and 2 phones play the melody only; 3 and 4 phones add the bass where it fits. Notes listed in 'alternate' sit on two phones and take turns. Spare gestures hold notes this song never uses, so a stray swing stays harmless. Sizes offered: 2, 3, 4.",
   "arrangements": {
     "2": {
       "parts": ["melody"],
