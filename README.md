@@ -69,6 +69,13 @@ that song's source and anything simplified to fit the bells.
 Every page except `debug.html` counts visits with [GoatCounter](https://www.goatcounter.com/), which uses no cookies. If you
 publish your own copy, remove its script from those pages or point it at your own account.
 
+## Versions and problem reports
+
+The game's version is set once, in the `version` meta tag in [index.html](index.html), and appears in the
+About panel. Bump it with each release. About also has a **Having problems?** link that offers to open a
+new GitHub issue for this game with the version and browser filled in; it notes that reporting an issue
+needs a GitHub account.
+
 ## License
 
 Code is under the [MIT License](LICENSE). Documents, written content, images, audio, and video are under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); see [LICENSE-CONTENT](LICENSE-CONTENT). © 2026 Michael A. Heroux.
