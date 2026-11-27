@@ -9,10 +9,17 @@
   <meta name="apple-mobile-web-app-title" content="Swing Time" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="robots" content="noindex, nofollow" />
+  <!-- The game's version, shown in the About panel. Bump it with each release. -->
+  <meta name="version" content="1.0.0" />
   <link rel="manifest" href="manifest.json?v=2" />
   <link rel="apple-touch-icon" href="icons/icon-180.png?v=2" />
   <link rel="icon" href="icons/icon-192.png?v=2" />
   <link rel="stylesheet" href="css/style.css?v=9" />
+  <style>
+    .about-version { font-size: 0.85rem; opacity: 0.85; }
+    .about-dialog .about-link { color: var(--accent); }
+    .report-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+  </style>
   <!-- GoatCounter (cookie-free analytics) -->
   <script data-goatcounter="https://maherou-areflectionofyou.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>
@@ -45,6 +52,7 @@
   </main>
 
   <dialog class="about-dialog" id="about-dialog" aria-labelledby="about-title">
+    <p class="about-version">Swing Time · Version <span id="about-version"></span></p>
     <p id="about-title">© 2026 Michael A. Heroux</p>
     <p>Code is MIT licensed. Everything else is CC BY 4.0, except the bell sounds, which have their own
       license below.</p>
@@ -56,7 +64,20 @@
       <a href="https://opensource.org/license/mit" target="_blank" rel="noopener">MIT License</a>
       <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>
     </p>
+    <p><button type="button" class="about-link" id="problems-btn" aria-haspopup="dialog">Having problems?</button></p>
     <button type="button" class="btn" id="about-close">Close</button>
+  </dialog>
+
+  <dialog class="about-dialog" id="report-dialog" aria-labelledby="report-title">
+    <p id="report-title"><strong>Having problems?</strong></p>
+    <p>Would you like to report an issue? We'll open a new issue for Swing Time on GitHub in a new tab,
+      with the game's version and your browser filled in. Then describe what went wrong.</p>
+    <p class="about-credit">Reporting an issue requires a free GitHub account.</p>
+    <div class="report-actions">
+      <button type="button" class="btn btn-ghost" id="report-cancel">Not now</button>
+      <a class="btn btn-primary" id="report-go" href="https://github.com/AReflectionOfYou/SwingTimeGame/issues/new"
+         target="_blank" rel="noopener">Report an issue</a>
+    </div>
   </dialog>
 
   <script src="js/config.js?v=9"></script>
@@ -88,23 +109,46 @@
       songRow.hidden = true;
     });
 
-    // About panel: a native <dialog>, so Escape closes it for free.
+    // About panel and "Having problems?": native <dialog>s, so Escape closes them for free.
     (function () {
-      const dialog = document.getElementById('about-dialog');
-      const open = document.getElementById('about-btn');
+      const $ = (id) => document.getElementById(id);
+      const dialog = $('about-dialog');
+      const report = $('report-dialog');
+      const open = $('about-btn');
       if (typeof dialog.showModal !== 'function') {
         open.hidden = true;
         return;
       }
-      open.addEventListener('click', () => dialog.showModal());
-      document.getElementById('about-close').addEventListener('click', () => dialog.close());
-      // A click on the backdrop lands on the dialog element itself, outside its box.
-      dialog.addEventListener('click', (e) => {
-        if (e.target !== dialog) return;
-        const r = dialog.getBoundingClientRect();
-        const inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
-        if (!inside) dialog.close();
+      const version = () => {
+        const meta = document.querySelector('meta[name="version"]');
+        return meta ? meta.content.trim() : '';
+      };
+      // A new GitHub issue for this game, with the version and browser filled in.
+      const issueUrl = () => {
+        const body = '**What happened?**\n\n\n**What did you expect to happen?**\n\n\n' +
+          '---\nGame: Swing Time ' + (version() || '(unknown version)') + '\nBrowser: ' + navigator.userAgent;
+        return 'https://github.com/AReflectionOfYou/SwingTimeGame/issues/new?body=' + encodeURIComponent(body);
+      };
+      open.addEventListener('click', () => {
+        $('about-version').textContent = version() || 'unknown';
+        dialog.showModal();
       });
+      $('about-close').addEventListener('click', () => dialog.close());
+      $('problems-btn').addEventListener('click', () => {
+        dialog.close();
+        $('report-go').href = issueUrl();
+        report.showModal();
+      });
+      $('report-cancel').addEventListener('click', () => report.close());
+      // The link opens GitHub in a new tab; close the panel behind it.
+      $('report-go').addEventListener('click', () => report.close());
+      // A click on the backdrop lands on the dialog element itself, outside its box.
+      [dialog, report].forEach((d) => d.addEventListener('click', (e) => {
+        if (e.target !== d) return;
+        const r = d.getBoundingClientRect();
+        const inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+        if (!inside) d.close();
+      }));
     })();
   </script>
 </body>
