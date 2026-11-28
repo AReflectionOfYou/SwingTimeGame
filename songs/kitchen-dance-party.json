@@ -1,0 +1,42 @@
+{
+  "title": "Kitchen Dance Party",
+  "bpm": 108,
+  "beatsPerMeasure": 4,
+  "_about": "PROPOSED for owner review. An original tune written for Swing Time with Claude in 2026, not based on any existing song, and shared under the project's CC BY 4.0 license like its other content. A bright party tune: a short verse, then a big chorus that climbs to the top bell, played twice. Melody in the upper octave (real recordings), steady quarter notes so it forgives loose timing; the bass bounces between each chord's root and fifth in the chorus. Chords: C G Am F. One beat = a quarter note.",
+  "parts": {
+    "melody":
+      "Mi2 Mi2 Re2 Do2 | Re2 Re2 Ti/2 | Do2 Mi2 Do2 Mi2 | Do2/4 | Mi2 Mi2 Sol2 Mi2 | Re2/2 Ti/2 | Do2 Do2 Re2 Mi2 | Re2/4 | Mi2 Sol2 Do3 Sol2 | Ti2/2 Sol2/2 | La2 Sol2 Mi2 Do2 | La2/4 | Mi2 Sol2 Do3 Sol2 | Ti2 La2 Sol2/2 | La2 La2 Do3 La2 | Sol2/2 Ti2/2 | Mi2 Sol2 Do3 Sol2 | Ti2/2 Sol2/2 | La2 Sol2 Mi2 Do2 | La2/4 | Mi2 Sol2 Do3 Sol2 | Ti2 La2 Sol2/2 | La2 La2 Do3 La2 | Do3/4",
+    "bass":
+      "Do/4 | Sol/4 | La/4 | Fa/4 | Do/4 | Sol/4 | Fa/4 | Sol/4 | Do/2 Sol/2 | Sol/2 Re/2 | La/2 Mi/2 | Fa/2 Do/2 | Do/2 Sol/2 | Sol/2 Re/2 | Fa/2 Do/2 | Sol/2 Re/2 | Do/2 Sol/2 | Sol/2 Re/2 | La/2 Mi/2 | Fa/2 Do/2 | Do/2 Sol/2 | Sol/2 Re/2 | Fa/2 Do/2 | Do/4"
+  },
+  "_arrangements": "Layouts proposed by a search that keeps every phone from ringing two notes at once and spreads quick notes between players. 2 and 3 phones play the melody only (2 phones is the busiest); 4 phones add the bouncing bass. Notes listed in 'alternate' sit on two phones and take turns. Spare gestures hold notes this song never uses, so a stray swing stays harmless. Sizes offered: 2, 3, 4.",
+  "arrangements": {
+    "2": {
+      "parts": ["melody"],
+      "layout": {
+        "A": {"forward": "Sol2", "back": "La2", "left": "Do2", "right": "Re2"},
+        "B": {"forward": "Mi2", "back": "Do3", "left": "Ti2", "right": "Ti"}
+      }
+    },
+    "3": {
+      "parts": ["melody"],
+      "alternate": ["Do2", "Sol2", "La2"],
+      "layout": {
+        "A": {"forward": "Do3", "back": "Do2", "left": "Ti2", "right": "Ti"},
+        "B": {"forward": "Mi2", "back": "Sol2", "left": "La2", "right": "Sol"},
+        "C": {"forward": "Sol2", "back": "La2", "left": "Re2", "right": "Do2"}
+      }
+    },
+    "4": {
+      "parts": ["melody", "bass"],
+      "alternate": ["Fa", "La2"],
+      "layout": {
+        "A": {"forward": "Sol2", "back": "Do2", "left": "Ti", "right": "La2"},
+        "B": {"forward": "Mi2", "back": "Do3", "left": "Fa", "right": "Ti2"},
+        "C": {"forward": "La2", "back": "Re2", "left": "Mi", "right": "Fa"},
+        "D": {"forward": "Sol", "back": "Do", "left": "Re", "right": "La"}
+      }
+    }
+  },
+  "melody": ["Mi2", "Mi2", "Re2", "Do2", "Re2", "Re2", "Ti", "Do2", "Mi2", "Do2", "Mi2", "Do2", "Mi2", "Mi2", "Sol2", "Mi2", "Re2", "Ti", "Do2", "Do2", "Re2", "Mi2", "Re2", "Mi2", "Sol2", "Do3", "Sol2", "Ti2", "Sol2", "La2", "Sol2", "Mi2", "Do2", "La2", "Mi2", "Sol2", "Do3", "Sol2", "Ti2", "La2", "Sol2", "La2", "La2", "Do3", "La2", "Sol2", "Ti2", "Mi2", "Sol2", "Do3", "Sol2", "Ti2", "Sol2", "La2", "Sol2", "Mi2", "Do2", "La2", "Mi2", "Sol2", "Do3", "Sol2", "Ti2", "La2", "Sol2", "La2", "La2", "Do3", "La2", "Do3"]
+}
